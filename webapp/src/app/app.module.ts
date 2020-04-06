@@ -1,6 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { FlashMessagesModule } from 'angular2-flash-messages';
+import { HttpClientModule } from '@angular/common/http'; 
+import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -11,6 +14,8 @@ import { LoginComponent } from './Components/login/login.component';
 import { ProfileComponent } from './Components/profile/profile.component';
 import { RegisterComponent } from './Components/register/register.component';
 import { DashboardComponent } from './Components/dashboard/dashboard.component';
+import { AuthService } from "./services/auth.service";
+import { ValidateService } from "./services/validate.service";
 
 @NgModule({
   declarations: [
@@ -26,6 +31,9 @@ import { DashboardComponent } from './Components/dashboard/dashboard.component';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    FormsModule,
+    HttpClientModule,
+    FlashMessagesModule.forRoot(),
     RouterModule.forRoot([
       {path: '', component: HomeComponent},
       {path: 'register', component:RegisterComponent},
@@ -34,7 +42,7 @@ import { DashboardComponent } from './Components/dashboard/dashboard.component';
       {path: 'profile', component: ProfileComponent},
     ])
   ],
-  providers: [],
+  providers: [AuthService, ValidateService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
