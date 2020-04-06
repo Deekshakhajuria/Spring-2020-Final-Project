@@ -16,6 +16,7 @@ import { RegisterComponent } from './Components/register/register.component';
 import { DashboardComponent } from './Components/dashboard/dashboard.component';
 import { AuthService } from "./services/auth.service";
 import { ValidateService } from "./services/validate.service";
+import { AuthGuard } from "./guards/auth.guard";
 
 @NgModule({
   declarations: [
@@ -38,11 +39,11 @@ import { ValidateService } from "./services/validate.service";
       {path: '', component: HomeComponent},
       {path: 'register', component:RegisterComponent},
       {path: 'login', component: LoginComponent},
-      {path: 'dashboard', component: DashboardComponent},
-      {path: 'profile', component: ProfileComponent},
+      {path: 'dashboard', component: DashboardComponent,canActivate:[AuthGuard]},
+      {path: 'profile', component: ProfileComponent,canActivate:[AuthGuard]},
     ])
   ],
-  providers: [AuthService, ValidateService],
+  providers: [AuthService, ValidateService,AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
