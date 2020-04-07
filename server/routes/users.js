@@ -64,6 +64,6 @@ router.post('/expense', expenseController.save);
 router.get('/expense/:id', expenseController.get);
 router.put('/expense/:id', expenseController.update);
 router.delete('/expense/:id', expenseController.delete);
-
+router.get('/barchart/:month', expenseController.list);
 
 module.exports = router;
