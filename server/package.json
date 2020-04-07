@@ -1,0 +1,22 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "Web project Server",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "express": "4.17.1",
+    "mongoose": "5.9.7",
+    "bcryptjs": "*",
+    "cors": "2.8.5",
+    "jsonwebtoken": "8.5.1",
+    "body-parser": "*",
+    "passport": "*",
+    "passport-jwt": "*",
+    "bcrypt": "4.0.1"
+  },
+  "author": "Mengfan Shi",
+  "license": "ISC"
+}
