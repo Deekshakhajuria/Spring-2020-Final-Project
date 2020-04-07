@@ -1,10 +1,11 @@
 export class Expense {
-    id: string;
+    _id: string;
     description: string;
     amount: number;
     Date: Date;
     category: string;
     constructor() {
+        this._id ="";
         this.description = "";
         this.amount = null;
         this.Date = new Date();
