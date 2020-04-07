@@ -48,6 +48,7 @@ import { ExpenseItemComponent } from './Components/expense-item/expense-item.com
     ])
   ],
   providers: [AuthService, ValidateService,AuthGuard],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [ExpenseItemComponent]
 })
 export class AppModule { }
