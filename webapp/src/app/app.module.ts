@@ -4,6 +4,7 @@ import { RouterModule } from '@angular/router';
 import { FlashMessagesModule } from 'angular2-flash-messages';
 import { HttpClientModule } from '@angular/common/http'; 
 import { FormsModule } from '@angular/forms';
+import { MatDialogModule} from '@angular/material/dialog';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -17,6 +18,7 @@ import { DashboardComponent } from './Components/dashboard/dashboard.component';
 import { AuthService } from "./services/auth.service";
 import { ValidateService } from "./services/validate.service";
 import { AuthGuard } from "./guards/auth.guard";
+import { ExpenseItemComponent } from './Components/expense-item/expense-item.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,8 @@ import { AuthGuard } from "./guards/auth.guard";
     LoginComponent,
     ProfileComponent,
     RegisterComponent,
-    DashboardComponent
+    DashboardComponent,
+    ExpenseItemComponent
   ],
   imports: [
     BrowserModule,
@@ -34,6 +37,7 @@ import { AuthGuard } from "./guards/auth.guard";
     BrowserAnimationsModule,
     FormsModule,
     HttpClientModule,
+    MatDialogModule,
     FlashMessagesModule.forRoot(),
     RouterModule.forRoot([
       {path: '', component: HomeComponent},
