@@ -19,8 +19,8 @@ import { AuthService } from "./services/auth.service";
 import { ValidateService } from "./services/validate.service";
 import { AuthGuard } from "./guards/auth.guard";
 import { ExpenseItemComponent } from './Components/expense-item/expense-item.component';
-import { BarchartComponent } from './barchart/barchart.component';
-import { PiechartComponent } from './piechart/piechart.component';
+import { BarchartComponent } from './Components/barchart/barchart.component';
+import { PiechartComponent } from './Components/piechart/piechart.component';
 
 @NgModule({
   declarations: [

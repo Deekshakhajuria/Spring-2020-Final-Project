@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ExpenseService } from '../services/expense.service';
+import { ExpenseService } from '../../services/expense.service';
 import {Chart } from 'chart.js';
 
 @Component({

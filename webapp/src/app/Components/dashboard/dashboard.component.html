@@ -15,11 +15,6 @@
             </th>
         </thead>
         <tbody  *ngFor="let expense of expenses; let i = index;">
-            <!-- <tr *ngIf="!expenses">
-                <td class="font-italic text-center" colspan="5">
-                    No expenses recorded
-                </td>
-            </tr> -->
             <tr>
                 <td>{{expense.description}}</td>
                 <td>{{expense.amount}}</td>

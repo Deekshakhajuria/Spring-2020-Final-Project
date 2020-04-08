@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Chart} from 'chart.js';
-import { ExpenseService } from '../services/expense.service';
+import { ExpenseService } from '../../services/expense.service';
 import { LabelOptions } from '@angular/material/core';
 
 
