@@ -3,7 +3,7 @@ import { Expense } from "../../models/expense";
 import { ExpenseService } from "../../services/expense.service";
 import { MatDialogModule, MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ExpenseItemComponent } from "../expense-item/expense-item.component";
-
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-dashboard',
@@ -21,6 +21,7 @@ export class DashboardComponent implements OnInit {
     this.expenseService.getAllExpense().subscribe(items => {
       this.expenses = items;
     });
+    // this.asyncPipeExpenses$ = this.expenseService.getAllExpense();
   }
 
   delete(expense: Expense): void {
@@ -36,11 +37,10 @@ export class DashboardComponent implements OnInit {
         dialogConfig.data = {
           index 
         };
-        this.dialog.open(ExpenseItemComponent,dialogConfig)
-  }
-
-
-  
-
+        this.dialog.open(ExpenseItemComponent,dialogConfig);
+        this.dialog.afterAllClosed.subscribe(() => {
+          this.ngOnInit();
+        })
+        }
 }
 

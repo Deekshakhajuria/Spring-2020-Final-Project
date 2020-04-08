@@ -14,7 +14,7 @@
         </button>
             </th>
         </thead>
-        <tbody  *ngFor="let expense of expenses; let i = index">
+        <tbody  *ngFor="let expense of expenses; let i = index;">
             <!-- <tr *ngIf="!expenses">
                 <td class="font-italic text-center" colspan="5">
                     No expenses recorded
@@ -23,10 +23,10 @@
             <tr>
                 <td>{{expense.description}}</td>
                 <td>{{expense.amount}}</td>
-                <td>{{expense.Date | date:'shortDate'}}</td>
+                <td>{{expense.Date | date:'yyyy-MM-dd'}}</td>
                 <td>{{expense.category}}</td>
                 <td style="text-align: center;">
-                    <button class="btn btn-sm btn-info text-white actionButton mr-2" matTooltip="Edit Expense" >
+                    <button class="btn btn-sm btn-info text-white actionButton mr-2" matTooltip="Edit Expense" (click) ="add(i)" >
                         <i class="fa fa-pencil"></i><span class="sm-1"></span> Edit
                     </button>
 
