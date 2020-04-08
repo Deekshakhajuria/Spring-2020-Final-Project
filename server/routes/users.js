@@ -66,4 +66,15 @@ router.put('/expense/:id', expenseController.update);
 router.delete('/expense/:id', expenseController.delete);
 router.get('/barchart/:month', expenseController.list);
 
+// router.get('/barchart', function(req,res,callback){
+
+//     blogPostData(function(result){
+//         var month_data = result.month_data;
+//         var number_of_posts_data = result.number_of_posts_data；
+
+//         console.log;
+        
+//     })
+// })
+
 module.exports = router;
