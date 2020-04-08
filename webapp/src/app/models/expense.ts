@@ -5,7 +5,6 @@ export class Expense {
     Date: Date;
     category: string;
     constructor() {
-        this._id ="";
         this.description = "";
         this.amount = null;
         this.Date = new Date();

@@ -11,10 +11,10 @@
             </select> -->
             <input type="text" name="category" class="form-control" #category="ngModel" [(ngModel)]="formDataExpense.category" placeholder="Expense Category">
         </div>
-<!-- 
-        <input type="hidden" name="Id" #Id="ngModel" [(ngModel)]="formDataExpense.Id">
 
-        <input type="hidden" name="CategoryName" #CategoryName="ngModel" [(ngModel)]="formDataExpense.CategoryName"> -->
+        <input type="hidden" name="id" #id="ngModel" [(ngModel)]="formDataExpense._id">
+
+        <!-- <input type="hidden" name="CategoryName" #CategoryName="ngModel" [(ngModel)]="formDataExpense.CategoryName"> -->
     </div>
 
     <div class="form-row">
@@ -45,4 +45,3 @@
         </div>
     </div>
 </form>
-<button (click)="close()">Close</button>

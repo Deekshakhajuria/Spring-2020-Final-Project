@@ -15,7 +15,7 @@ const httpOptions = {
 export class ExpenseService {
 
   constructor(private http: HttpClient) {}
-  expenses: Expense[];
+  expenses: Expense[] =[];
   baseurl = 'http://localhost:3000/users/expense';
   
   getAllExpense():Observable<Expense[]>{
@@ -30,8 +30,8 @@ export class ExpenseService {
       });
   };
 
-  updateExpense(expense: Expense):  Observable<Expense>{
-    const url = `${this.baseurl}/${expense._id}`;
+  updateExpense(id: number, expense: Expense): Observable<Expense>{
+    const url = `${this.baseurl}/${id}`;
     return this.http.put<Expense>(url, expense, httpOptions);
   }
 
