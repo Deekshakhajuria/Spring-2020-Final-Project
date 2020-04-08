@@ -19,6 +19,8 @@ import { AuthService } from "./services/auth.service";
 import { ValidateService } from "./services/validate.service";
 import { AuthGuard } from "./guards/auth.guard";
 import { ExpenseItemComponent } from './Components/expense-item/expense-item.component';
+import { BarchartComponent } from './barchart/barchart.component';
+import { PiechartComponent } from './piechart/piechart.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +31,9 @@ import { ExpenseItemComponent } from './Components/expense-item/expense-item.com
     ProfileComponent,
     RegisterComponent,
     DashboardComponent,
-    ExpenseItemComponent
+    ExpenseItemComponent,
+    BarchartComponent,
+    PiechartComponent
   ],
   imports: [
     BrowserModule,
@@ -45,6 +49,8 @@ import { ExpenseItemComponent } from './Components/expense-item/expense-item.com
       {path: 'login', component: LoginComponent},
       {path: 'dashboard', component: DashboardComponent,canActivate:[AuthGuard]},
       {path: 'profile', component: ProfileComponent,canActivate:[AuthGuard]},
+      {path: 'barchart', component:BarchartComponent},
+      {path: 'piechart', component:PiechartComponent},
     ])
   ],
   providers: [AuthService, ValidateService,AuthGuard],
