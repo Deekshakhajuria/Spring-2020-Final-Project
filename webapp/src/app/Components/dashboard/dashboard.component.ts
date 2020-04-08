@@ -4,6 +4,7 @@ import { ExpenseService } from "../../services/expense.service";
 import { MatDialogModule, MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ExpenseItemComponent } from "../expense-item/expense-item.component";
 import { Observable } from 'rxjs';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-dashboard',
@@ -15,7 +16,8 @@ export class DashboardComponent implements OnInit {
   public newExpense: Expense = new Expense();
   constructor(
     private expenseService: ExpenseService,
-    private dialog : MatDialog) { }
+    private dialog : MatDialog,
+    private toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.expenseService.getAllExpense().subscribe(items => {
@@ -27,6 +29,9 @@ export class DashboardComponent implements OnInit {
   delete(expense: Expense): void {
     this.expenses = this.expenses.filter(h => h !== expense);
     this.expenseService.deleteExpense(expense).subscribe();
+    this.toastr.success("Item Delete Success!","Expense Delete",{
+      timeOut:2000
+    });
   }
 
   add(index: number){

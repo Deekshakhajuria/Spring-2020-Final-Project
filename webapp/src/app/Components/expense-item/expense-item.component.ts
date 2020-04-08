@@ -1,11 +1,12 @@
 import { Component, OnInit, Inject, Input} from '@angular/core';
 import { Expense } from "../../models/expense";
 import { ExpenseService } from "../../services/expense.service";
-import { FlashMessagesService } from 'angular2-flash-messages';
+// import { FlashMessagesService } from 'angular2-flash-messages';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { NgForm } from '@angular/forms';
 import { isNullOrUndefined } from 'util';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-expense-item',
@@ -22,7 +23,7 @@ export class ExpenseItemComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data,
     public dialogRef : MatDialogRef<ExpenseItemComponent>,
     private expenseService : ExpenseService,
-    private flashMessages: FlashMessagesService ,
+    private toastr: ToastrService
   ) { }
 
   ngOnInit(): void {
@@ -56,11 +57,15 @@ export class ExpenseItemComponent implements OnInit {
         const id = this.expenses[this.data.index]._id;
         console.log(id);
         this.expenseService.updateExpense(id, form.value).subscribe();
-        this.flashMessages.show("Update success!", {cssClass: 'alert-success', timeout:3000});
+        this.toastr.success("Item update success!", "Expense Update",{
+          timeOut:2000
+        } );
     }
     else {
       this.expenseService.addExpense(form.value);
-      this.flashMessages.show("Add success!", {cssClass: 'alert-success', timeout:3000})
+      this.toastr.success("Item add success!","Expense Add ",{
+        timeOut:2000
+      })
       }
     
     console.log("After Save");

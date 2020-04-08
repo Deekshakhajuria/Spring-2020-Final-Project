@@ -5,6 +5,7 @@ import { FlashMessagesModule } from 'angular2-flash-messages';
 import { HttpClientModule } from '@angular/common/http'; 
 import { FormsModule } from '@angular/forms';
 import { MatDialogModule} from '@angular/material/dialog';
+import { ToastrModule } from 'ngx-toastr';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -43,6 +44,7 @@ import { PiechartComponent } from './Components/piechart/piechart.component';
     HttpClientModule,
     MatDialogModule,
     FlashMessagesModule.forRoot(),
+    ToastrModule.forRoot(),
     RouterModule.forRoot([
       {path: '', component: HomeComponent},
       {path: 'register', component:RegisterComponent},
