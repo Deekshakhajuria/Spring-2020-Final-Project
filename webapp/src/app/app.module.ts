@@ -6,6 +6,12 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { MatDialogModule} from '@angular/material/dialog';
 import { ToastrModule } from 'ngx-toastr';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatInputModule} from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatSelectModule } from '@angular/material/select';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -22,6 +28,8 @@ import { AuthGuard } from "./guards/auth.guard";
 import { ExpenseItemComponent } from './Components/expense-item/expense-item.component';
 import { BarchartComponent } from './Components/barchart/barchart.component';
 import { PiechartComponent } from './Components/piechart/piechart.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+
 
 @NgModule({
   declarations: [
@@ -34,7 +42,7 @@ import { PiechartComponent } from './Components/piechart/piechart.component';
     DashboardComponent,
     ExpenseItemComponent,
     BarchartComponent,
-    PiechartComponent
+    PiechartComponent,
   ],
   imports: [
     BrowserModule,
@@ -43,6 +51,12 @@ import { PiechartComponent } from './Components/piechart/piechart.component';
     FormsModule,
     HttpClientModule,
     MatDialogModule,
+    MatNativeDateModule,
+    MatDatepickerModule,
+    MatInputModule,
+    MatFormFieldModule,
+    MatIconModule,
+    MatSelectModule,
     FlashMessagesModule.forRoot(),
     ToastrModule.forRoot(),
     RouterModule.forRoot([
@@ -53,7 +67,8 @@ import { PiechartComponent } from './Components/piechart/piechart.component';
       {path: 'profile', component: ProfileComponent,canActivate:[AuthGuard]},
       {path: 'barchart', component:BarchartComponent},
       {path: 'piechart', component:PiechartComponent},
-    ])
+    ]),
+    FontAwesomeModule
   ],
   providers: [AuthService, ValidateService,AuthGuard],
   bootstrap: [AppComponent],

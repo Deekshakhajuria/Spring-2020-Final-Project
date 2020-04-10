@@ -1,46 +1,60 @@
-<h5 class="display-4">Track New Expense</h5>
+<h5 class="display-4">Log New Expense</h5>
 <hr>
 <form #form="ngForm" autocomplete="off" (submit)="onSubmit(form)">
     <div class="form-row">
         <div class="form-group col-md-12">
-            <select name="category" class="form-control" #category="ngModel" [(ngModel)]="formDataExpense.category" required>
-                <option hidden value="" disabled selected>Select Expense category </option>
-                <option value="Travel">Travel</option>
-                <option value="Shopping">Shopping</option>
-                <option value="Rent">Rent</option>
-                <option value="Dining">Dining</option>
-                <option value="Medical">Medical</option>
-                <option value="Mobile/Internet bill">Mobile/Internet bill</option>
-                <option value="Other">Other</option>
-            </select>
+            <mat-form-field>
+                <mat-label>Expense category</mat-label>
+                <mat-select [(ngModel)]="formDataExpense.category" name="category" #category="ngModel" required>
+                    <mat-option value="Travel">Travel</mat-option>
+                    <mat-option value="Shopping">Shopping</mat-option>
+                    <mat-option value="Rent">Rent</mat-option>
+                    <mat-option value="Dining">Dining</mat-option>
+                    <mat-option value="Medical">Medical</mat-option>
+                    <mat-option value="Mobile/Internet bill">Mobile/Internet bill</mat-option>
+                    <mat-option value="Other">Other</mat-option>
+                </mat-select>
+              </mat-form-field>
         </div>
+        
         <input type="hidden" name="id" #id="ngModel" [(ngModel)]="formDataExpense._id">
     </div>
 
     <div class="form-row">
         <div class="form-group col-md-12">
-            <input type="text" name="description" class="form-control" #description="ngModel" [(ngModel)]="formDataExpense.description" placeholder="Expense Description" required>
-            <div class="invalid-feedback">Description is required.</div>
+            <mat-form-field class="example-full-width">
+                <input matInput placeholder="Expense Description" name="description" type="text" [(ngModel)]="formDataExpense.description" #description="ngModel"
+                       required minlength="1">
+            </mat-form-field>
+              <div *ngIf="description.errors && (description.dirty || description.touched)" class="alert alert-danger">
+                <small>Description is required.</small>
+              </div>
         </div>
     </div>
 
     <div class="form-row">
         <div class="form-group col-md-5">
-            <input type="number" name="amount" class="form-control" #amount="ngModel" [(ngModel)]="formDataExpense.amount" placeholder="Expense Amount" required>
+            <!-- <input type="number" name="amount" class="form-control" #amount="ngModel" [(ngModel)]="formDataExpense.amount" placeholder="Expense Amount" required> -->
+            <mat-form-field class="example-full-width">
+                <input matInput placeholder="Expense Amount" type="number" min="1" name="amount" [(ngModel)]="formDataExpense.amount" #amount="ngModel" required>
+            </mat-form-field>
+            <div *ngIf="amount.errors && (amount.dirty || amount.touched)" class="alert alert-danger">
+                <small>Amount is required (positive amount, max 2 decimal places).</small>
+            </div>
         </div>
 
-        <div class="form-group col-md-7" style="display: flex">
-
-            <!-- <input type="text" [matDatepicker]="picker" placeholder="Expense Date" name="Date" #Date="ngModel" [(ngModel)]="formDataExpense.Date" readonly class="form-control">
-            <mat-datepicker-toggle matSuffix [for]="picker" text-color="yellow"></mat-datepicker-toggle>
-            <mat-datepicker #picker disabled=f alse></mat-datepicker> -->
-            <input type="date" [(ngModel)] = "formDataExpense.Date" name = "Date" required>
+        <div class="form-group col-md-5" style="display: flex">
+            <mat-form-field class="example-full-width">
+                <input matInput [matDatepicker]="picker" placeholder="Choose a date" [(ngModel)]="formDataExpense.Date" name="Date" #date="ngModel" required>       
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker touchUi #picker></mat-datepicker> 
+            </mat-form-field>    
         </div>
     </div>
 
     <div class="modal-footer">
-        <button type="submit" class="btn btn-primary " style="margin-right: 5px;"><i class="fa fa-save"><span class="ml-1"></span></i>SAVE CHANGES</button>
-        <button type="button" class="btn btn-secondary float-right " (click)="close()"><i class="fa fa-close"></i><span class="ml-1"></span>CLOSE</button>
+        <button type="submit" class="btn btn-primary " style="margin-right: 5px;">SAVE CHANGES</button>
+        <button type="button" class="btn btn-secondary float-right " (click)="close()">CLOSE</button>
     </div>
 </form>
 

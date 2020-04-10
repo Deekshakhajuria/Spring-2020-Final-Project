@@ -10,7 +10,7 @@
             <th>Expense Category</th>
             <th style="text-align: center;">
                 <button class="btn btn-sm btn-success text-white" matTooltip="Add New Expense" (click) ="add(null)" >
-                <i class="fa fa-plus"></i> <span class="ml-1"> </span>Add Expense
+                <mat-icon aria-hidden="false" aria-label="Example add icon" >add</mat-icon>Add Expense
         </button>
             </th>
         </thead>
@@ -22,11 +22,11 @@
                 <td>{{expense.category}}</td>
                 <td style="text-align: center;">
                     <button class="btn btn-sm btn-info text-white actionButton mr-2" matTooltip="Edit Expense" (click) ="add(i)" >
-                        <i class="fa fa-pencil"></i><span class="sm-1"></span> Edit
+                    <mat-icon aria-hidden="false" aria-label="Example Edit icon" >edit</mat-icon> Edit
                     </button>
 
                     <button class="btn btn-sm btn-danger text-white actionButton" matTooltip="Delete Expense" (click)="delete(expense)">
-                    <i class="fa fa-trash" aria-hidden="true"></i> <span class="sm-1"></span> Delete
+                        <mat-icon aria-hidden="false" aria-label="Example Delete icon" >delete</mat-icon><span class="sm-1"></span> Delete
                     </button>
                 </td>
             </tr>

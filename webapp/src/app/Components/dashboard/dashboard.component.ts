@@ -23,7 +23,6 @@ export class DashboardComponent implements OnInit {
     this.expenseService.getAllExpense().subscribe(items => {
       this.expenses = items;
     });
-    // this.asyncPipeExpenses$ = this.expenseService.getAllExpense();
   }
 
   delete(expense: Expense): void {
