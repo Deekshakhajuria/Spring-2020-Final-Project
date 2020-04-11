@@ -15,6 +15,8 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatPaginatorModule} from '@angular/material/paginator';
 import { MatTableModule } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
+import { MatDividerModule} from '@angular/material/divider';
+import { MatCardModule} from '@angular/material/card';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -63,6 +65,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     MatPaginatorModule,
     MatTableModule,
     MatSortModule,
+    MatDividerModule,
+    MatCardModule,
     FlashMessagesModule.forRoot(),
     ToastrModule.forRoot(),
     RouterModule.forRoot([

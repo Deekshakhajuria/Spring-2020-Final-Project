@@ -22,7 +22,7 @@ const ExpenseSchema = new Schema({
     }
 },
 {
-    versionKey: false
+    versionKey: false,
 });
 
 ExpenseSchema.virtual('id').get(function () {

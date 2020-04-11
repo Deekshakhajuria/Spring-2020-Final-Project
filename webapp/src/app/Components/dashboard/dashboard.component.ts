@@ -5,9 +5,6 @@ import { MatDialogModule, MatDialog, MatDialogConfig } from '@angular/material/d
 import { ExpenseItemComponent } from "../expense-item/expense-item.component";
 import { Observable } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatTableDataSource } from '@angular/material/table';
-import { MatSort } from '@angular/material/sort';
 
 @Component({
   selector: 'app-dashboard',
@@ -15,12 +12,9 @@ import { MatSort } from '@angular/material/sort';
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
-  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
-  @ViewChild('sorter', {static: true}) sort: MatSort;
   expenses: Expense[];
   public newExpense: Expense = new Expense();
-  expensesData = new MatTableDataSource<Expense>();
-  @Input() displayColumns: string[] = ['description', 'amount', 'date', 'category','action'];
+
   constructor(
     private expenseService: ExpenseService,
     private dialog : MatDialog,
@@ -30,9 +24,6 @@ export class DashboardComponent implements OnInit {
     this.expenseService.getAllExpense().subscribe(items => {
       this.expenses = items;
     });
-    this.expensesData = new MatTableDataSource<Expense>(this.expenses);
-    this.expensesData.paginator = this.paginator;
-    this.expensesData.sort = this.sort;
   }
 
   delete(expense: Expense): void {
