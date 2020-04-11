@@ -12,6 +12,9 @@ import { MatInputModule} from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSelectModule } from '@angular/material/select';
+import { MatPaginatorModule} from '@angular/material/paginator';
+import { MatTableModule } from '@angular/material/table';
+import { MatSortModule } from '@angular/material/sort';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -57,6 +60,9 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     MatFormFieldModule,
     MatIconModule,
     MatSelectModule,
+    MatPaginatorModule,
+    MatTableModule,
+    MatSortModule,
     FlashMessagesModule.forRoot(),
     ToastrModule.forRoot(),
     RouterModule.forRoot([

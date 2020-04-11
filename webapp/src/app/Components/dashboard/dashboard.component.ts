@@ -1,10 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,ViewChild,Input} from '@angular/core';
 import { Expense } from "../../models/expense";
 import { ExpenseService } from "../../services/expense.service";
 import { MatDialogModule, MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ExpenseItemComponent } from "../expense-item/expense-item.component";
 import { Observable } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatSort } from '@angular/material/sort';
 
 @Component({
   selector: 'app-dashboard',
@@ -12,8 +15,12 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
+  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
+  @ViewChild('sorter', {static: true}) sort: MatSort;
   expenses: Expense[];
   public newExpense: Expense = new Expense();
+  expensesData = new MatTableDataSource<Expense>();
+  @Input() displayColumns: string[] = ['description', 'amount', 'date', 'category','action'];
   constructor(
     private expenseService: ExpenseService,
     private dialog : MatDialog,
@@ -23,6 +30,9 @@ export class DashboardComponent implements OnInit {
     this.expenseService.getAllExpense().subscribe(items => {
       this.expenses = items;
     });
+    this.expensesData = new MatTableDataSource<Expense>(this.expenses);
+    this.expensesData.paginator = this.paginator;
+    this.expensesData.sort = this.sort;
   }
 
   delete(expense: Expense): void {
@@ -45,6 +55,11 @@ export class DashboardComponent implements OnInit {
         this.dialog.afterAllClosed.subscribe(() => {
           this.ngOnInit();
         })
-        }
+  }
+
+  isDataEmpty(): boolean {
+    return this.expenses.length === 0;
+  }
 }
+
 

@@ -10,8 +10,8 @@
             <th>Expense Category</th>
             <th style="text-align: center;">
                 <button class="btn btn-sm btn-success text-white" matTooltip="Add New Expense" (click) ="add(null)" >
-                <mat-icon aria-hidden="false" aria-label="Example add icon" >add</mat-icon>Add Expense
-        </button>
+                    <mat-icon aria-hidden="false" aria-label="Example add icon" >add</mat-icon>Add Expense
+                </button>
             </th>
         </thead>
         <tbody  *ngFor="let expense of expenses; let i = index;">
@@ -22,7 +22,7 @@
                 <td>{{expense.category}}</td>
                 <td style="text-align: center;">
                     <button class="btn btn-sm btn-info text-white actionButton mr-2" matTooltip="Edit Expense" (click) ="add(i)" >
-                    <mat-icon aria-hidden="false" aria-label="Example Edit icon" >edit</mat-icon> Edit
+                        <mat-icon aria-hidden="false" aria-label="Example Edit icon" >edit</mat-icon> Edit
                     </button>
 
                     <button class="btn btn-sm btn-danger text-white actionButton" matTooltip="Delete Expense" (click)="delete(expense)">
@@ -30,8 +30,6 @@
                     </button>
                 </td>
             </tr>
-
         </tbody>
     </table>
-
 </div>

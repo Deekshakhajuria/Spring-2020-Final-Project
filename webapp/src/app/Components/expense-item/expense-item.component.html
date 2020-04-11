@@ -53,7 +53,7 @@
     </div>
 
     <div class="modal-footer">
-        <button type="submit" class="btn btn-primary " style="margin-right: 5px;">SAVE CHANGES</button>
+        <button type="submit" class="btn btn-primary " [disabled]="!form.valid" style="margin-right: 5px;">SAVE CHANGES</button>
         <button type="button" class="btn btn-secondary float-right " (click)="close()">CLOSE</button>
     </div>
 </form>
