@@ -17,6 +17,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
 import { MatDividerModule} from '@angular/material/divider';
 import { MatCardModule} from '@angular/material/card';
+import { HighchartsChartComponent } from 'highcharts-angular';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -31,7 +32,7 @@ import { AuthService } from "./services/auth.service";
 import { ValidateService } from "./services/validate.service";
 import { AuthGuard } from "./guards/auth.guard";
 import { ExpenseItemComponent } from './Components/expense-item/expense-item.component';
-import { BarchartComponent } from './Components/barchart/barchart.component';
+import { BarchartComponent } from "./Components/barchart/barchart.component";
 import { PiechartComponent } from './Components/piechart/piechart.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
@@ -67,6 +68,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     MatSortModule,
     MatDividerModule,
     MatCardModule,
+    HighchartsChartComponent,
     FlashMessagesModule.forRoot(),
     ToastrModule.forRoot(),
     RouterModule.forRoot([
