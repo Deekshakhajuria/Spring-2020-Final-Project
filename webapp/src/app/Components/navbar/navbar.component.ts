@@ -19,6 +19,7 @@ export class NavbarComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  // If this function triggered, clear current user resource in localStorage and go back the login page
   onLogoutClick(){
     this.authService.logout();
     this.flashMessage.show('You are logged out', {

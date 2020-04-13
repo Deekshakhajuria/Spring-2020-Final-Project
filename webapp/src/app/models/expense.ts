@@ -1,3 +1,4 @@
+// Define the expense item model
 export class Expense {
     _id: string;
     description: string;

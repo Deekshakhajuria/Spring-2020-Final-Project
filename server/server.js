@@ -9,6 +9,8 @@ let express = require('express'),
     users = require('./routes/users'),
     cors = require('cors');
 
+    
+// mongoose instance connect to database url
 mongoose.connect(config.database);
 mongoose.connection.on('connected', () => {
     console.log('Connected to database' + config.database)
@@ -28,6 +30,8 @@ app.use(bodyParser.json());
 //     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
 //     next();
 // });
+
+//Enabling CORS
 app.use(cors());
 
 app.use(express.static(path.join(__dirname, 'public')));
@@ -36,6 +40,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 require('./config/passport')(passport);
 
+//Start the app 
 app.use('/users', users)
 
 app.get('/',(req, res) => {

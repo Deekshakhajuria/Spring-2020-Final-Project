@@ -3,6 +3,9 @@ const ExtractJwt = require('passport-jwt').ExtractJwt;
 const User = require('../models/user');
 const config = require('../config/database');
 
+/**
+ * Use JWT token-based authentication.
+ */
 module.exports = function(passport) {
     let opts ={};
     opts.jwtFromRequest = ExtractJwt.fromAuthHeaderWithScheme('jwt');

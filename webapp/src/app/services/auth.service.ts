@@ -19,14 +19,16 @@ export class AuthService {
 
   constructor(private http: HttpClient) { }
 
+// Register new user by post
   registerUser(user):Observable<any> {
     return this.http.post('http://localhost:3000/users/register', user, httpOptions);
   }
-
+// Authenticate registered user by post 
   authenticateUser(user): Observable<any> {
     return this.http.post('http://localhost:3000/users/authenticate', user, httpOptions);
   }
 
+// Add token headers to get user profile 
   getProfile() {
     this.loadToken();
     const headers = new HttpHeaders({
@@ -36,6 +38,7 @@ export class AuthService {
     return this.http.get('http://localhost:3000/users/profile', {headers: headers});
   }
 
+// Store the user resource in localStorage
   storeUserData(token, user){
     localStorage.setItem('id_token', token);
     localStorage.setItem('user', JSON.stringify(user));
@@ -43,6 +46,7 @@ export class AuthService {
     this.user = user;
   }
 
+// Get token from localStorage 
   loadToken() {
     const token = localStorage.getItem('id_token');
     this.authToken = token;

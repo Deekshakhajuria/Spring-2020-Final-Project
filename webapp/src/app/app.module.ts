@@ -17,7 +17,6 @@ import { MatTableModule } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
 import { MatDividerModule} from '@angular/material/divider';
 import { MatCardModule} from '@angular/material/card';
-import { HighchartsChartComponent } from 'highcharts-angular';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -68,7 +67,6 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     MatSortModule,
     MatDividerModule,
     MatCardModule,
-    HighchartsChartComponent,
     FlashMessagesModule.forRoot(),
     ToastrModule.forRoot(),
     RouterModule.forRoot([

@@ -18,10 +18,12 @@ export class ExpenseService {
   expenses: Expense[] =[];
   baseurl = 'http://localhost:3000/users/expense';
   
+// Get expense resource from backend
   getAllExpense():Observable<Expense[]>{
   return this.http.get<Expense[]>(this.baseurl, httpOptions);
 };
 
+// Add expense item to backend 
   addExpense(expense: Expense){
     return this.http.post<Expense>(this.baseurl,expense, httpOptions)
       .subscribe((res) => {
@@ -30,12 +32,14 @@ export class ExpenseService {
       });
   };
 
+// Update expense item to backend by item id
   updateExpense(id: number, expense: Expense): Observable<Expense>{
     const url = `${this.baseurl}/${id}`;
     return this.http.put<Expense>(url, expense, httpOptions);
   }
 
   
+// Delete expense item from backend by item or id
   deleteExpense (expense: Expense | number): Observable<Expense> {
     const id = typeof expense === 'number' ? expense : expense._id;
     const url = `${this.baseurl}/${id}`;
