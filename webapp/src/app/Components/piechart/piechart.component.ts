@@ -1,40 +1,33 @@
 import { Component, OnInit } from '@angular/core';
-import {Chart} from 'chart.js';
-import { ExpenseService } from '../services/expense.service';
-import { LabelOptions } from '@angular/material/core';
-
-
-var MONTHS = [ 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'Ocotober', 'Novemeber' , 'December'];
-
+import { ExpenseService } from '../../services/expense.service';
+import {Chart } from 'chart.js';
 
 @Component({
-  selector: 'app-barchart',
-  templateUrl: './barchart.component.html',
+  selector: 'app-piechart',
+  templateUrl: './piechart.component.html',
 })
+export class PiechartComponent implements OnInit {
 
-
-export class BarchartComponent implements OnInit {
   data: ExpenseService[];  
-  Months = [];  
+  Category = [];  
   Amount = [];  
-  barchart = [];  
-  constructor(private expenseService: ExpenseService) { }
-
+  chart = [];  
+  constructor(private expenseService: ExpenseService) { } 
   
-  ngOnInit() {  
+   ngOnInit() {  
     this.expenseService.getAllExpense().subscribe(result => {  
-      result.forEach(x => {  
-        this.Months.push(x.Date);
+      result.forEach(x => {    
+        this.Category.push(x.category);  
         this.Amount.push(x.amount);  
       });  
-      this.barchart = new Chart('canvas1', {  
-        type: 'bar', 
+     this  
+      this.chart = new Chart('canvas', {  
+        type: 'pie',  
         data: {  
-          labels: ['January','February','March','April','May','June','July','August','September','October','November','December'],  
+          labels: this.Category,  
           datasets: [  
             {  
-              
-              data: this.Amount,
+              data: this.Amount,  
               borderColor: '#3cba9f',  
               backgroundColor: [  
                 "#3cb371",  
@@ -55,14 +48,14 @@ export class BarchartComponent implements OnInit {
         },  
         options: {  
           legend: {  
-            display: false  
+            display: true  
           },  
           scales: {  
             xAxes: [{  
-              display: true  
+              display: false  
             }],  
             yAxes: [{  
-              display: true  
+              display: false  
             }],  
           }  
         }  

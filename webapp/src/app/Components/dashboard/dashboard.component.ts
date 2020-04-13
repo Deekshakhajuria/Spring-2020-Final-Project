@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,ViewChild,Input} from '@angular/core';
 import { Expense } from "../../models/expense";
 import { ExpenseService } from "../../services/expense.service";
 import { MatDialogModule, MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ExpenseItemComponent } from "../expense-item/expense-item.component";
-
+import { Observable } from 'rxjs';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-dashboard',
@@ -13,9 +14,11 @@ import { ExpenseItemComponent } from "../expense-item/expense-item.component";
 export class DashboardComponent implements OnInit {
   expenses: Expense[];
   public newExpense: Expense = new Expense();
+
   constructor(
     private expenseService: ExpenseService,
-    private dialog : MatDialog) { }
+    private dialog : MatDialog,
+    private toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.expenseService.getAllExpense().subscribe(items => {
@@ -26,6 +29,9 @@ export class DashboardComponent implements OnInit {
   delete(expense: Expense): void {
     this.expenses = this.expenses.filter(h => h !== expense);
     this.expenseService.deleteExpense(expense).subscribe();
+    this.toastr.success("Item Delete Success!","Expense Delete",{
+      timeOut:2000
+    });
   }
 
   add(index: number){
@@ -36,11 +42,15 @@ export class DashboardComponent implements OnInit {
         dialogConfig.data = {
           index 
         };
-        this.dialog.open(ExpenseItemComponent,dialogConfig)
+        this.dialog.open(ExpenseItemComponent,dialogConfig);
+        this.dialog.afterAllClosed.subscribe(() => {
+          this.ngOnInit();
+        })
   }
 
-
-  
-
+  isDataEmpty(): boolean {
+    return this.expenses.length === 0;
+  }
 }
+
 

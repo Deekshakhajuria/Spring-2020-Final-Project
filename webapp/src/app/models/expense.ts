@@ -1,5 +1,5 @@
 export class Expense {
-    id: string;
+    _id: string;
     description: string;
     amount: number;
     Date: Date;

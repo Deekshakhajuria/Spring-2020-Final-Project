@@ -1,33 +1,40 @@
 import { Component, OnInit } from '@angular/core';
-import { ExpenseService } from '../services/expense.service';
-import {Chart } from 'chart.js';
+import {Chart} from 'chart.js';
+import { ExpenseService } from '../../services/expense.service';
+import { LabelOptions } from '@angular/material/core';
+
+
+var MONTHS = [ 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'Ocotober', 'Novemeber' , 'December'];
+
 
 @Component({
-  selector: 'app-piechart',
-  templateUrl: './piechart.component.html',
+  selector: 'app-barchart',
+  templateUrl: './barchart.component.html',
 })
-export class PiechartComponent implements OnInit {
 
+
+export class BarchartComponent implements OnInit {
   data: ExpenseService[];  
-  Category = [];  
+  Months = [];  
   Amount = [];  
-  chart = [];  
-  constructor(private expenseService: ExpenseService) { } 
+  barchart = [];  
+  constructor(private expenseService: ExpenseService) { }
+
   
-   ngOnInit() {  
+  ngOnInit() {  
     this.expenseService.getAllExpense().subscribe(result => {  
-      result.forEach(x => {    
-        this.Category.push(x.category);  
+      result.forEach(x => {  
+        this.Months.push(x.Date);
         this.Amount.push(x.amount);  
       });  
-     this  
-      this.chart = new Chart('canvas', {  
-        type: 'pie',  
+      this.barchart = new Chart('canvas1', {  
+        type: 'bar', 
         data: {  
-          labels: this.Category,  
+          labels: ['January','February','March','April','May','June','July','August','September','October','November','December'],  
           datasets: [  
             {  
-              data: this.Amount,  
+              
+              data: this.Amount,
               borderColor: '#3cba9f',  
               backgroundColor: [  
                 "#3cb371",  
@@ -48,14 +55,14 @@ export class PiechartComponent implements OnInit {
         },  
         options: {  
           legend: {  
-            display: true  
+            display: false  
           },  
           scales: {  
             xAxes: [{  
-              display: false  
+              display: true  
             }],  
             yAxes: [{  
-              display: false  
+              display: true  
             }],  
           }  
         }  
