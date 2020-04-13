@@ -11,7 +11,7 @@ export class PiechartComponent implements OnInit {
   data: ExpenseService[];  
   Category = [];  
   Amount = [];  
-  chart = [];  
+  chart : any;  
   constructor(private expenseService: ExpenseService) { } 
   
    ngOnInit() {  
@@ -20,8 +20,7 @@ export class PiechartComponent implements OnInit {
         this.Category.push(x.category);  
         this.Amount.push(x.amount);  
       });  
-     this  
-      this.chart = new Chart('canvas', {  
+     this.chart = new Chart('canvas', {  
         type: 'pie',  
         data: {  
           labels: this.Category,  
