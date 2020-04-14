@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { Chart } from 'chart.js';
 import { ExpenseService } from '../../services/expense.service';
 import { LabelOptions } from '@angular/material/core';
@@ -6,7 +6,7 @@ import { Expense } from 'src/app/models/expense';
 import { months } from 'moment';
 
 
-// var MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'Ocotober', 'Novemeber', 'December'];
+// var Months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'Ocotober', 'Novemeber', 'December'];
 
 
 @Component({
@@ -20,21 +20,26 @@ export class BarchartComponent implements OnInit {
   expenses: Expense[];
   Months = [];
   Amount = [];
+  monthSummary = [];
   date: Date;
+  currentDate : any;
   barchart: any;
+  monthSum = 0;
+  currentamount:number;
   constructor(private expenseService: ExpenseService) { }
-
+  
+  
 
   ngOnInit() {
+    const monthNames = ['January', 'February', 'March', 'April', 'May', 'June',
+      'July', 'August', 'September', 'October', 'November', 'December'
+    ];
     this.expenseService.getAllExpense().subscribe(result => {
       result.forEach(x => {
-        const currentDate = new Date(x.Date);
-        this.Months.push(currentDate.getMonth() + 1);
-        this.Amount.push(x.amount);
-        // for (let i = 1; i < 6; i ++)
-        // this.Months.push(currentDate.getMonth()+ i);
-        // this.Amount.push(x.amount);
-        // console.log(currentDate.getMonth()+1);
+        this.currentDate = new Date(x.Date);
+        this.currentamount = x.amount;
+        this.monthSum += this.currentamount;
+        this.Amount[this.currentDate.getMonth()]= this.monthSum[this.currentDate.getMonth()];
       });
       
       // this.expenseService.getAllExpense().subscribe(item => {
@@ -50,10 +55,10 @@ export class BarchartComponent implements OnInit {
       this.barchart = new Chart('canvas1', {
         type: 'bar',
         data: {
+          // labels: this.monthSummary,
           labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
           datasets: [
             {
-
               data: this.Amount,
               borderColor: '#3cba9f',
               backgroundColor: [
