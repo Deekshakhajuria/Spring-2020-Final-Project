@@ -25,7 +25,6 @@
         class="nav-item">
         <a class="nav-link" [routerLink]="['/piechart']">Piechart</a>
       </li>
-      
       <li *ngIf="authService.loggedIn()" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"
         class="nav-item">
         <a class="nav-link" [routerLink]="['/profile']">Profile</a>
