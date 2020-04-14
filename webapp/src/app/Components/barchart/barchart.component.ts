@@ -4,6 +4,7 @@ import { ExpenseService } from '../../services/expense.service';
 import { LabelOptions } from '@angular/material/core';
 import { Expense } from 'src/app/models/expense';
 import { months } from 'moment';
+import { tick } from '@angular/core/testing';
 
 
 // var Months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'Ocotober', 'Novemeber', 'December'];
@@ -64,7 +65,7 @@ export class BarchartComponent implements OnInit {
               barThickness: 30,
               maxBarThickness: 50,
               minBarLength: 2,
-              fill: true
+              fill: true,
             }
           ]
         },
@@ -77,6 +78,10 @@ export class BarchartComponent implements OnInit {
               stacked: true,
               gridLines: {
                 offsetGridLines: true
+              },
+              ticks:{
+                padding: 10,
+
               }
             }],
             yAxes: [{
