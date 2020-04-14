@@ -1,10 +1,7 @@
 import { Component, OnInit, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { Chart } from 'chart.js';
 import { ExpenseService } from '../../services/expense.service';
-import { LabelOptions } from '@angular/material/core';
 import { Expense } from 'src/app/models/expense';
-import { months } from 'moment';
-import { tick } from '@angular/core/testing';
 
 
 // var Months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'Ocotober', 'Novemeber', 'December'];
@@ -21,12 +18,14 @@ export class BarchartComponent implements OnInit {
   data: ExpenseService[];
   expenses: Expense[];
   Months = [];
-  Amount = [];
+  
+  Amount = [null,null,null,null,null,null,null,null,null,null,null,null];
+  eachamount = [];
   date: Date;
   currentDate: any;
   barchart: any;
-  monthSum = 0;
   currentamount: number;
+
   constructor(private expenseService: ExpenseService) { }
 
   ngOnInit() {
@@ -35,14 +34,15 @@ export class BarchartComponent implements OnInit {
       result.forEach(x => {
         this.currentDate = new Date(x.Date);    // import Date from database)
         this.currentamount = x.amount;          // create a currentamount array for import amount
-        this.monthSum += this.currentamount;    // 
-        this.Amount[this.currentDate.getMonth()] = this.monthSum;// push amount into bar chart with related month
+        // this.monthSum += this.currentamount;    
+        this.Amount[this.currentDate.getMonth()] += this.currentamount;// push amount into bar chart with related month
+        // this.description = new info(x.description);
       });
 
       this.barchart = new Chart('canvas1', {
         type: 'bar',
         data: {
-          labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+          labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
           datasets: [
             {
               data: this.Amount,
@@ -80,6 +80,8 @@ export class BarchartComponent implements OnInit {
                 offsetGridLines: true
               },
               ticks:{
+                maxRotation: 0, //make sure the Month label is in the right rotation.(default is 45 degree)
+                minRotation: 0,
                 padding: 10,
 
               }
