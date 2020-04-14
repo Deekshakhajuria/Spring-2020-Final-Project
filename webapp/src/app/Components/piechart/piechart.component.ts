@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ExpenseService } from '../../services/expense.service';
-import {Chart } from 'chart.js';
+import { Chart } from 'chart.js';
+import { Expense } from 'src/app/models/expense';
+import { Transform } from 'stream';
 
 @Component({
   selector: 'app-piechart',
@@ -9,17 +11,44 @@ import {Chart } from 'chart.js';
 export class PiechartComponent implements OnInit {
 
   data: ExpenseService[];  
-  Category = [];  
-  Amount = [];  
+  expenses: Expense[];
+  Category = ["Travel","Shopping","Rent","Dining","Medicial","Mobile/Internet bill","Other"];  
+  Amount = [0,0,0,0,0,0,0];  
+  currentCategory: any;
+  currentamount: number;
+  currentDate: any;
   chart : any;  
+
   constructor(private expenseService: ExpenseService) { } 
   
    ngOnInit() {  
     this.expenseService.getAllExpense().subscribe(result => {  
-      result.forEach(x => {    
-        this.Category.push(x.category);  
-        this.Amount.push(x.amount);  
+      result.forEach(x => {
+        
+        this.currentCategory = new String(x.category);  
+        this.currentamount = x.amount;
+        if(this.currentCategory == "Travel"){
+          this.Amount[0] += this.currentamount;
+        }else if(this.currentCategory == "Shopping"){
+          this.Amount[1] += this.currentamount;
+        }
+        else if(this.currentCategory == "Rent"){
+          this.Amount[2] += this.currentamount;
+        }
+        else if(this.currentCategory == "Dining"){
+          this.Amount[3] += this.currentamount;
+        }
+        else if(this.currentCategory == "Medicial"){
+          this.Amount[4] += this.currentamount;
+        }
+        else if(this.currentCategory == "Other"){
+          this.Amount[6] += this.currentamount;
+        }else{
+          this.Amount[5] += this.currentamount;
+        }
       });  
+
+
      this.chart = new Chart('canvas', {  
         type: 'pie',  
         data: {  
@@ -27,19 +56,15 @@ export class PiechartComponent implements OnInit {
           datasets: [  
             {  
               data: this.Amount,  
-              borderColor: '#3cba9f',  
+              borderColor: 'rgba(0, 0, 0, 0)',  
               backgroundColor: [  
-                "#3cb371",  
-                "#0000FF",  
-                "#9966FF",  
-                "#4C4CFF",  
-                "#00FFFF",  
-                "#f990a7",  
-                "#aad2ed",  
-                "#FF00FF",  
-                "Blue",  
-                "Red",  
-                "Blue"  
+                'rgba(255, 99, 132, 1)', //1
+                'rgba(54, 162, 235, 1)', //2
+                'rgba(255, 206, 86, 1)', //3
+                'rgba(75, 192, 192, 1)', //4
+                'rgba(153, 102, 255, 1)', //5
+                'rgba(255, 159, 64, 1)', //6
+                'rgba(215, 129, 233, 1)', //7
               ],  
               fill: true  
             }  

@@ -27,10 +27,6 @@
       </li>
       <li *ngIf="authService.loggedIn()" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"
         class="nav-item">
-        <a class="nav-link" [routerLink]="['/view']">View</a>
-      </li>
-      <li *ngIf="authService.loggedIn()" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"
-        class="nav-item">
         <a class="nav-link" [routerLink]="['/profile']">Profile</a>
       </li>
 

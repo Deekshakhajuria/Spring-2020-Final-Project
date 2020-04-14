@@ -1,4 +1,4 @@
-import { Component, OnInit, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { Chart } from 'chart.js';
 import { ExpenseService } from '../../services/expense.service';
 import { Expense } from 'src/app/models/expense';
@@ -18,10 +18,8 @@ export class BarchartComponent implements OnInit {
   data: ExpenseService[];
   expenses: Expense[];
   Months = [];
-  
   Amount = [null,null,null,null,null,null,null,null,null,null,null,null];
-  eachamount = [];
-  date: Date;
+  // date: Date;
   currentDate: any;
   barchart: any;
   currentamount: number;
@@ -34,9 +32,7 @@ export class BarchartComponent implements OnInit {
       result.forEach(x => {
         this.currentDate = new Date(x.Date);    // import Date from database)
         this.currentamount = x.amount;          // create a currentamount array for import amount
-        // this.monthSum += this.currentamount;    
         this.Amount[this.currentDate.getMonth()] += this.currentamount;// push amount into bar chart with related month
-        // this.description = new info(x.description);
       });
 
       this.barchart = new Chart('canvas1', {
