@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const config = require('../config/database');
 const Schema = mongoose.Schema;
 
+// Define the expense item model
 
 const ExpenseSchema = new Schema({
     description: {

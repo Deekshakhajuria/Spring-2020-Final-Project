@@ -2,7 +2,14 @@
 
 const expenseService = require('../services/expense-service');
 
+/**
+ * Set response for expense item search.
+ * 
+ * @param request
+ * @param response
+ */
 exports.list = (request, response) => {
+    // Enable search by category
     const categoryQuery = request.query.category;
     const params = {};
     if(categoryQuery) {
@@ -18,6 +25,12 @@ exports.list = (request, response) => {
         .catch(renderErrorResponse(response));
 };
 
+/**
+ * Create new expense items and set the response.
+ * 
+ * @param request
+ * @param response
+ */
 exports.save = (request, response) => {
     const item = Object.assign({}, request.body);
     const result = (saveItem) => {
@@ -30,6 +43,12 @@ exports.save = (request, response) => {
         .catch(renderErrorResponse(response));
 };
 
+/**
+ * Get expense list item response.
+ * 
+ * @param request
+ * @param response
+ */
 exports.get = (request, response) => {
     const itemId = request.params.id;
     const result = (item) => {
@@ -41,6 +60,13 @@ exports.get = (request, response) => {
         .then(result)
         .catch(renderErrorResponse(response));
 };
+
+/**
+ * Update expesne item resources
+ * 
+ * @param request
+ * @param response
+ */
 
 exports.update = (request, response) => {
     const itemId = request.params.id;
@@ -56,6 +82,12 @@ exports.update = (request, response) => {
         .catch(renderErrorResponse(response));
 };
 
+/**
+ * Delete an expense item resource.
+ * 
+ * @param request
+ * @param response
+ */
 exports.delete = (request, response) => {
     const itemId = request.params.id;
     const result = () => {
@@ -69,7 +101,12 @@ exports.delete = (request, response) => {
         .then(result)
         .catch(renderErrorResponse(response));
 };
-
+/**
+ * Error handle function
+ * 
+ * @param {Response} response response object
+ * @param {Function} function error handle function
+ */
 let renderErrorResponse = (response) => {
     const errorCallback = (error) => {
         if(error) {

@@ -56,11 +56,13 @@ export class ExpenseItemComponent implements OnInit {
     {   
         const id = this.expenses[this.data.index]._id;
         console.log(id);
+        // if the expense item index exists, update the chosen expense item.
         this.expenseService.updateExpense(id, form.value).subscribe();
         this.toastr.success("Item update success!", "Expense Update",{
           timeOut:2000
         } );
     }
+    // Else add new expense item.
     else {
       this.expenseService.addExpense(form.value);
       this.toastr.success("Item add success!","Expense Add ",{
@@ -71,6 +73,7 @@ export class ExpenseItemComponent implements OnInit {
     console.log("After Save");
     // console.log(this.formDataExpense);
    
+    // After submit, close the dialog.
     this.close();
 
 }

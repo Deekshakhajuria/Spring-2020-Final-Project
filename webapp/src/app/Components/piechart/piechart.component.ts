@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ExpenseService } from '../../services/expense.service';
 import { Chart } from 'chart.js';
 import { Expense } from 'src/app/models/expense';
-import { Transform } from 'stream';
 
 @Component({
   selector: 'app-piechart',

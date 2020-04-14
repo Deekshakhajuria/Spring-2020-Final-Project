@@ -10,7 +10,7 @@
       <li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}" class="nav-items">
         <a class="nav-link" [routerLink]="['/']">Home</a>
       </li>
-      <!-- Only show if logged in -->
+      <!-- Only show following links if logged in -->
       <li *ngIf="authService.loggedIn()" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"
         class="nav-item">
         <a class="nav-link" [routerLink]="['/dashboard']">Dashboard</a>
@@ -29,7 +29,7 @@
         class="nav-item">
         <a class="nav-link" [routerLink]="['/profile']">Profile</a>
       </li>
-
+      <!-- Only show following links if logged out -->
       <li *ngIf="!authService.loggedIn()" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"
         class="nav-item">
         <a class="nav-link" [routerLink]="['/login']">Login</a>
@@ -38,27 +38,11 @@
         class="nav-item">
         <a class="nav-link" [routerLink]="['/register']">Register</a>
       </li>
+      <!-- Show if logged in -->
       <li *ngIf="authService.loggedIn()" class="nav-item">
         <a class="nav-link" (click)="onLogoutClick()" href="#">Logout</a>
       </li>
-      <!-- <li class="nav-item">
-          <a class="nav-link" href="#">Features</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Pricing</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">About</a>
-        </li> -->
     </ul>
-    <!-- <ul class="navbar-nav mr-auto my-2 my-sm-0 navbar-right">
-        <li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}" class="nav-item active">
-            <a class="nav-link"  [routerLink]="['/login']">Login</a>
-        </li>
-        <li [routerLinkActive]="['active']"  [routerLinkActiveOptions]="{exact:true}" class="nav-item active">
-            <a class="nav-link"[routerLink]="['/register']">Register</a>
-        </li>
-      </ul> -->
     <!-- <form class="form-inline my-2 my-lg-0">
         <input class="form-control mr-sm-2" type="text" placeholder="Search">
         <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
