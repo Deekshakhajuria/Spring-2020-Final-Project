@@ -11,7 +11,8 @@ import { months } from 'moment';
 
 @Component({
   selector: 'app-barchart',
-  templateUrl: './barchart.component.html'
+  templateUrl: './barchart.component.html',
+  styleUrls: ['./barchart.component.scss']
 })
 
 
@@ -20,60 +21,49 @@ export class BarchartComponent implements OnInit {
   expenses: Expense[];
   Months = [];
   Amount = [];
-  monthSummary = [];
   date: Date;
-  currentDate : any;
+  currentDate: any;
   barchart: any;
   monthSum = 0;
-  currentamount:number;
+  currentamount: number;
   constructor(private expenseService: ExpenseService) { }
-  
-  
 
   ngOnInit() {
-    const monthNames = ['January', 'February', 'March', 'April', 'May', 'June',
-      'July', 'August', 'September', 'October', 'November', 'December'
-    ];
+
     this.expenseService.getAllExpense().subscribe(result => {
       result.forEach(x => {
-        this.currentDate = new Date(x.Date);
-        this.currentamount = x.amount;
-        this.monthSum += this.currentamount;
-        this.Amount[this.currentDate.getMonth()]= this.monthSum[this.currentDate.getMonth()];
+        this.currentDate = new Date(x.Date);    // import Date from database)
+        this.currentamount = x.amount;          // create a currentamount array for import amount
+        this.monthSum += this.currentamount;    // 
+        this.Amount[this.currentDate.getMonth()] = this.monthSum;// push amount into bar chart with related month
       });
-      
-      // this.expenseService.getAllExpense().subscribe(item => {
-      //   this.expenses = item;
-      //   console.log(this.expenses)
-      //   // this.Months.push(this.expenses)
-      // })
-      // for (const expense in this.expenses) { 
-      //   const currentDate = new Date(expense.Date);
-      //   this.Months.push(currentDate.getMonth());
-      //   this.Amount.push(expense.amount)
-      // }
+
       this.barchart = new Chart('canvas1', {
         type: 'bar',
         data: {
-          // labels: this.monthSummary,
           labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
           datasets: [
             {
               data: this.Amount,
               borderColor: '#3cba9f',
-              backgroundColor: [
-                "#3cb371",
-                "#0000FF",
-                "#9966FF",
-                "#4C4CFF",
-                "#00FFFF",
-                "#f990a7",
-                "#aad2ed",
-                "#FF00FF",
-                "Blue",
-                "Red",
-                "Blue"
+              backgroundColor: [ //background color code for 12 bars
+                'rgba(255, 99, 132, 1)', //1
+                'rgba(54, 162, 235, 1)', //2
+                'rgba(255, 206, 86, 1)', //3
+                'rgba(75, 192, 192, 1)', //4
+                'rgba(153, 102, 255, 1)', //5
+                'rgba(255, 159, 64, 1)', //6
+                'rgba(215, 129, 233, 1)', //7
+                'rgba(175, 211, 86, 1)', //8
+                'rgba(35, 92, 192, 1)', //9
+                'rgba(125, 36, 76, 1)', //10
+                'rgba(95, 122, 192, 1)', //11
+                'rgba(175, 122, 162, 1)', //12
               ],
+              barPercentage: 0.5,
+              barThickness: 30,
+              maxBarThickness: 50,
+              minBarLength: 2,
               fill: true
             }
           ]
@@ -84,11 +74,18 @@ export class BarchartComponent implements OnInit {
           },
           scales: {
             xAxes: [{
-              display: true
+              stacked: true,
+              gridLines: {
+                offsetGridLines: true
+              }
             }],
             yAxes: [{
-              display: true
+              display: true,
+              ticks: {
+                beginAtZero: true
+              }
             }],
+
           }
         }
       });
