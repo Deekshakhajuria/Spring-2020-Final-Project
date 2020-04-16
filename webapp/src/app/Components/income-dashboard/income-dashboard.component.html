@@ -1,0 +1,35 @@
+<h2 class="page-header">Income Dashboard</h2>
+<p>Welcome to your Income LIst</p>
+
+<div class="col-md-10 offset-md-1 incomesDiv justify-content-center align-items-center">
+    <table class="table table-bordered">
+        <thead class="thead-light">
+            <th>Description</th>
+            <th>Income Amount ($)</th>
+            <th>Date</th>
+            <th>Income Category</th>
+            <th style="text-align: center;">
+                <button class="btn btn-sm btn-success text-white" matTooltip="Add New Income" (click) ="add(null)" >
+                    <mat-icon aria-hidden="false" aria-label="Example add icon" >add</mat-icon>Add Income
+                </button>
+            </th>
+        </thead>
+        <tbody  *ngFor="let income of incomes; let i = index;">
+            <tr>
+                <td>{{income.description}}</td>
+                <td>{{income.amount}}</td>
+                <td>{{income.Date | date:'yyyy-MM-dd'}}</td>
+                <td>{{income.category}}</td>
+                <td style="text-align: center;">
+                    <button class="btn btn-sm btn-info text-white actionButton mr-2" matTooltip="Edit Income" (click) ="add(i)" >
+                        <mat-icon aria-hidden="false" aria-label="Example Edit icon" >edit</mat-icon> Edit
+                    </button>
+
+                    <button class="btn btn-sm btn-danger text-white actionButton" matTooltip="Delete Income" (click)="delete(income)">
+                        <mat-icon aria-hidden="false" aria-label="Example Delete icon" >delete</mat-icon><span class="sm-1"></span> Delete
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

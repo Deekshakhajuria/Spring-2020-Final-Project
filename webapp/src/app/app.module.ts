@@ -27,10 +27,12 @@ import { LoginComponent } from './Components/login/login.component';
 import { ProfileComponent } from './Components/profile/profile.component';
 import { RegisterComponent } from './Components/register/register.component';
 import { DashboardComponent } from './Components/dashboard/dashboard.component';
+import { IncomeDashboardComponent } from './Components/income-dashboard/income-dashboard.component';
 import { AuthService } from "./services/auth.service";
 import { ValidateService } from "./services/validate.service";
 import { AuthGuard } from "./guards/auth.guard";
 import { ExpenseItemComponent } from './Components/expense-item/expense-item.component';
+import { IncomeItemComponent } from './Components/income-item/income-item.component';
 import { BarchartComponent } from "./Components/barchart/barchart.component";
 import { PiechartComponent } from './Components/piechart/piechart.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -45,7 +47,9 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     ProfileComponent,
     RegisterComponent,
     DashboardComponent,
+    IncomeDashboardComponent,
     ExpenseItemComponent,
+    IncomeItemComponent,
     BarchartComponent,
     PiechartComponent,
   ],
@@ -74,6 +78,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
       {path: 'register', component:RegisterComponent},
       {path: 'login', component: LoginComponent},
       {path: 'dashboard', component: DashboardComponent,canActivate:[AuthGuard]},
+      {path: 'incomedashboard', component: IncomeDashboardComponent,canActivate:[AuthGuard]},
       {path: 'profile', component: ProfileComponent,canActivate:[AuthGuard]},
       {path: 'barchart', component:BarchartComponent},
       {path: 'piechart', component:PiechartComponent},
@@ -82,6 +87,6 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
   ],
   providers: [AuthService, ValidateService,AuthGuard],
   bootstrap: [AppComponent],
-  entryComponents: [ExpenseItemComponent]
+  entryComponents: [ExpenseItemComponent, IncomeItemComponent]
 })
 export class AppModule { }
