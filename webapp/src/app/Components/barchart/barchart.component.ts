@@ -1,94 +1,97 @@
-import { Component, OnInit,Input } from '@angular/core';
-import {Chart} from 'chart.js';
+import { Component, OnInit} from '@angular/core';
+import { Chart } from 'chart.js';
 import { ExpenseService } from '../../services/expense.service';
-import { LabelOptions } from '@angular/material/core';
+import { Expense } from 'src/app/models/expense';
 
 
-var MONTHS = [ 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'Ocotober', 'Novemeber' , 'December'];
+// var Months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'Ocotober', 'Novemeber', 'December'];
 
 
 @Component({
   selector: 'app-barchart',
   templateUrl: './barchart.component.html',
+  styleUrls: ['./barchart.component.scss']
 })
 
 
 export class BarchartComponent implements OnInit {
-  data: ExpenseService[];  
-  Months = [];  
-  Amount = [];  
-  barchart = [];  
-  monthSummary =[];
+  data: ExpenseService[];
+  expenses: Expense[];
+  Months = [];
+  Amount = [null,null,null,null,null,null,null,null,null,null,null,null];
+  // date: Date;
   currentDate: any;
-  currentamount:number;
-  monthSum = 0;
+  barchart: any;
+  currentamount: number;
+
   constructor(private expenseService: ExpenseService) { }
 
-  
-  ngOnInit() {  
-    const monthNames = ['January', 'February', 'March', 'April', 'May', 'June',
-      'July', 'August', 'September', 'October', 'November', 'December'
-    ];
-    this.expenseService.getAllExpense().subscribe(result => {  
-      result.forEach(x => {  
-        // this.Months.push(x.Date);
-        // this.Amount.push(x.amount);  
-        this.currentDate = new Date(x.Date);
-        this.currentamount = x.amount;
-        if (this.currentDate.getMonth() == 2) {
-          this.monthSum += this.currentamount;}
-        console.log(this.currentDate.getFullYear())
-        // console.log(currentDate.getMonth());
-        });
-        this.monthSummary.push({
-          name: monthNames[2],
-          y: parseFloat(this.monthSum.toFixed(2))
-        })
-        console.log(this.monthSummary);
+  ngOnInit() {
 
+    this.expenseService.getAllExpense().subscribe(result => {
+      result.forEach(x => {
+        this.currentDate = new Date(x.Date);    // import Date from database)
+        this.currentamount = x.amount;          // create a currentamount array for import amount
+        this.Amount[this.currentDate.getMonth()] += this.currentamount;// push amount into bar chart with related month
+      });
 
-        
-      ;  
-      this.barchart = new Chart('canvas1', {  
-        type: 'bar', 
-        data: {  
-          labels: ['January','February','March','April','May','June','July','August','September','October','November','December'],  
-          datasets: [  
-            {  
-              
+      this.barchart = new Chart('canvas1', {
+        type: 'bar',
+        data: {
+          labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+          datasets: [
+            {
               data: this.Amount,
-              borderColor: '#3cba9f',  
-              backgroundColor: [  
-                "#3cb371",  
-                "#0000FF",  
-                "#9966FF",  
-                "#4C4CFF",  
-                "#00FFFF",  
-                "#f990a7",  
-                "#aad2ed",  
-                "#FF00FF",  
-                "Blue",  
-                "Red",  
-                "Blue"  
-              ],  
-              fill: true  
-            }  
-          ]  
-        },  
-        options: {  
-          legend: {  
-            display: false  
-          },  
-          scales: {  
-            xAxes: [{  
-              display: true  
-            }],  
-            yAxes: [{  
-              display: true  
-            }],  
-          }  
-        }  
-      });  
-    });  
+              borderColor: '#3cba9f',
+              backgroundColor: [ //background color code for 12 bars
+                'rgba(255, 99, 132, 1)', //1
+                'rgba(54, 162, 235, 1)', //2
+                'rgba(255, 206, 86, 1)', //3
+                'rgba(75, 192, 192, 1)', //4
+                'rgba(153, 102, 255, 1)', //5
+                'rgba(255, 159, 64, 1)', //6
+                'rgba(215, 129, 233, 1)', //7
+                'rgba(175, 211, 86, 1)', //8
+                'rgba(35, 92, 192, 1)', //9
+                'rgba(125, 36, 76, 1)', //10
+                'rgba(95, 122, 192, 1)', //11
+                'rgba(175, 122, 162, 1)', //12
+              ],
+              barPercentage: 0.5,
+              barThickness: 30,
+              maxBarThickness: 50,
+              minBarLength: 2,
+              fill: true,
+            }
+          ]
+        },
+        options: {
+          legend: {
+            display: false
+          },
+          scales: {
+            xAxes: [{
+              stacked: true,
+              gridLines: {
+                offsetGridLines: true
+              },
+              ticks:{
+                maxRotation: 0, //make sure the Month label is in the right rotation.(default is 45 degree)
+                minRotation: 0,
+                padding: 10,
+
+              }
+            }],
+            yAxes: [{
+              display: true,
+              ticks: {
+                beginAtZero: true
+              }
+            }],
+
+          }
+        }
+      });
+    });
   }
 }
