@@ -85,7 +85,10 @@ export class BarchartComponent implements OnInit {
             yAxes: [{
               display: true,
               ticks: {
-                beginAtZero: true
+                beginAtZero: true,
+                callback: function(value, index, values){
+                  return "$" +value;// use call back function to make $ currency on Y axes
+                }
               }
             }],
 

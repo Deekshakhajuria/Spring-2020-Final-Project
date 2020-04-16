@@ -36,6 +36,8 @@ import { IncomeItemComponent } from './Components/income-item/income-item.compon
 import { BarchartComponent } from "./Components/barchart/barchart.component";
 import { PiechartComponent } from './Components/piechart/piechart.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { ChartsComponent } from './Components/charts/charts.component';
+
 
 
 @NgModule({
@@ -52,6 +54,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     IncomeItemComponent,
     BarchartComponent,
     PiechartComponent,
+    ChartsComponent,
   ],
   imports: [
     BrowserModule,
@@ -82,6 +85,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
       {path: 'profile', component: ProfileComponent,canActivate:[AuthGuard]},
       {path: 'barchart', component:BarchartComponent},
       {path: 'piechart', component:PiechartComponent},
+      {path: 'charts', component:ChartsComponent},
     ]),
     FontAwesomeModule
   ],
