@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,Input } from '@angular/core';
 import {Chart} from 'chart.js';
 import { ExpenseService } from '../../services/expense.service';
 import { LabelOptions } from '@angular/material/core';
@@ -18,15 +18,37 @@ export class BarchartComponent implements OnInit {
   Months = [];  
   Amount = [];  
   barchart = [];  
+  monthSummary =[];
+  currentDate: any;
+  currentamount:number;
+  monthSum = 0;
   constructor(private expenseService: ExpenseService) { }
 
   
   ngOnInit() {  
+    const monthNames = ['January', 'February', 'March', 'April', 'May', 'June',
+      'July', 'August', 'September', 'October', 'November', 'December'
+    ];
     this.expenseService.getAllExpense().subscribe(result => {  
       result.forEach(x => {  
-        this.Months.push(x.Date);
-        this.Amount.push(x.amount);  
-      });  
+        // this.Months.push(x.Date);
+        // this.Amount.push(x.amount);  
+        this.currentDate = new Date(x.Date);
+        this.currentamount = x.amount;
+        if (this.currentDate.getMonth() == 2) {
+          this.monthSum += this.currentamount;}
+        console.log(this.currentDate.getFullYear())
+        // console.log(currentDate.getMonth());
+        });
+        this.monthSummary.push({
+          name: monthNames[2],
+          y: parseFloat(this.monthSum.toFixed(2))
+        })
+        console.log(this.monthSummary);
+
+
+        
+      ;  
       this.barchart = new Chart('canvas1', {  
         type: 'bar', 
         data: {  
