@@ -26,6 +26,7 @@ export class PiechartComponent implements OnInit {
         
         this.currentCategory = new String(x.category);  
         this.currentamount = x.amount;
+        // since Amount is an array which needs to set as the related tag names.
         if(this.currentCategory == "Travel"){
           this.Amount[0] += this.currentamount;
         }else if(this.currentCategory == "Shopping"){
