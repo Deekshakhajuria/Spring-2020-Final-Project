@@ -17,7 +17,7 @@ exports.search = (params) => {
  * @param income
  */
 exports.save = (income) => {
-    const newIncome = new Expense(income);
+    const newIncome = new Income(income);
     return newIncome.save();
 };
 
