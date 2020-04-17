@@ -7,9 +7,37 @@
         <li class="list-group-item">Incomes logged: {{incomes.length}}</li>
         <li class="list-group-item">User Since: {{user.createdAt | date:'mediumDate'}}</li>
     </ul>
+    <br>
+    <mat-card>
+        <mat-card-title>Summary</mat-card-title>
+        <mat-card-content>
+            <p>
+                Total Logged Expense Value: {{totalExpense}}
+            </p>
+            <div class="progress">
+                <div class="progress-bar progress-bar-striped progress-bar-animated bg-info" role="progressbar" [style.width]="totalExpense/(totalExpense+totalIncome) | percent"  aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+            <br>
+            <p>
+                Total Logged Income Value: {{totalIncome}}
+            </p>
+            <div class="progress">
+                <div class="progress-bar progress-bar-striped progress-bar-animated bg-danger" role="progressbar"  aria-valuemin="0" aria-valuemax="100" [style.width]="totalIncome/(totalExpense+totalIncome) | percent"></div>
+            </div>
+            <br>
+            <h5 style="font-weight: bold;">Current Balance: 
+                <!-- if balance > 0, display green text; else red text -->
+                <span *ngIf="totalExpense < totalIncome"  class="text-success" >{{totalIncome - totalExpense}}</span>
+                <span *ngIf="totalExpense > totalIncome"  class="text-danger" >{{totalIncome - totalExpense}}</span>
+
+            </h5>
+        </mat-card-content>
+
+    </mat-card>
+
+
+
 </div>
 
 
 
-                  
- 

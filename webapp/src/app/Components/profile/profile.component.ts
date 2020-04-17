@@ -16,8 +16,10 @@ export class ProfileComponent implements OnInit {
   user: any;
   expenses: Expense[];
   incomes: Income[];
-  
-  
+  totalExpense: any = 0;
+  totalIncome: any = 0;
+  balance: any = 0;
+
   constructor(
     private authService: AuthService,
     private router: Router,
@@ -35,12 +37,19 @@ export class ProfileComponent implements OnInit {
 
     this.incomeService.getAllIncome().subscribe(items => {
       this.incomes = items;
+      items.forEach(x => {
+        this.totalIncome += x.amount;
+      })
   });
 
     this.expenseService.getAllExpense().subscribe(items => {
       this.expenses = items;
-  });
+      items.forEach(x=> {
+        this.totalExpense +=x.amount;
+      })
 
+  });
 }
+
 }
 
