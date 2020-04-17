@@ -2,12 +2,16 @@ const express = require('express');
 const router = express.Router();
 const User = require('../models/user');
 const Expense = require('../models/expense');
+const Income = require('../models/income');
+
 const expenseController = require('../controllers/expense-controllers')
+const incomeController = require('../controllers/income-controller')
+
 const passport = require('passport');
 const jwt = require('jsonwebtoken');
 const config = require('../config/database');
 
-// Router for users and expense items.
+// Router for users and expense/income items.
 
 router.post('/register', (req, res, next) => {
     let newUser = new User({
@@ -66,6 +70,17 @@ router.post('/expense', expenseController.save);
 router.get('/expense/:id', expenseController.get);
 router.put('/expense/:id', expenseController.update);
 router.delete('/expense/:id', expenseController.delete);
-// router.get('/barchart/:month', expenseController.list);
+
+// router.get('/income', incomeController.list);
+// router.post('/income', incomeController.save);
+// router.get('/income/:id', incomeController.get);
+// router.put('/income/:id', incomeController.update);
+// router.delete('/income/:id', incomeController.delete);
+
+router.get('/income', incomeController.list);
+router.post('/income', incomeController.save);
+router.get('/income/:id', incomeController.get);
+router.put('/income/:id', incomeController.update);
+router.delete('/income/:id', incomeController.delete);
 
 module.exports = router;

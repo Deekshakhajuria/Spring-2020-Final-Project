@@ -13,12 +13,16 @@
       <!-- Only show following links if logged in -->
       <li *ngIf="authService.loggedIn()" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"
         class="nav-item">
-        <a class="nav-link" [routerLink]="['/dashboard']">Dashboard</a>
+        <a class="nav-link" [routerLink]="['/dashboard']"> Expense Dashboard</a>
       </li>
+      <li *ngIf="authService.loggedIn()" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"
+        class="nav-item">
+        <a class="nav-link" [routerLink]="['/incomedashboard']"> Income Dashboard</a>
+      </li>      
       <!--Bar chart-->
       <li *ngIf="authService.loggedIn()" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"
-        class="nav-item"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        <a class="nav-link" [routerLink]="['/barchart']">Barchart</a>
+        class="nav-item">
+        <a class="nav-link" [routerLink]="['/charts']">Charts</a>
       </li>
       <!--pie chart-->
       <li *ngIf="authService.loggedIn()" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"
