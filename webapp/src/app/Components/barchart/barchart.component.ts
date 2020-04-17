@@ -1,4 +1,4 @@
-import { Component, OnInit, ɵbypassSanitizationTrustResourceUrl } from '@angular/core';
+import { Component, OnInit, OnChanges, SimpleChange } from '@angular/core';
 import { Chart } from 'chart.js';
 import { ExpenseService } from '../../services/expense.service';
 import { Expense } from 'src/app/models/expense';
@@ -32,6 +32,10 @@ export class BarchartComponent implements OnInit {
   currentamount: number;
   currentamount2: number;
 
+  lessThanOrGreaterThan = 'lessThan';
+  filterLimit = 100;
+  from = '0';
+  toMonth = '12';
 
   constructor(private expenseService: ExpenseService, private incomeService: IncomeService) { }
 
@@ -42,7 +46,7 @@ export class BarchartComponent implements OnInit {
         this.currentamount2 = y.amount;          // create a currentamount array for import amount
         this.Amount2[this.currentDate.getMonth()] += this.currentamount2;// push amount into bar chart with related month
       });
-    })
+    })// for income part bar
     this.expenseService.getAllExpense().subscribe(result => {
       result.forEach(x => {
         this.currentDate = new Date(x.Date);    // import Date from database)
@@ -56,18 +60,18 @@ export class BarchartComponent implements OnInit {
         // yAxisID: 'y-axis-1',
         borderColor: '#3cba9f',
         backgroundColor: [ //background color code for 12 bars
-          'rgba(255, 99, 132, 1)', 
-          'rgba(255, 99, 132, 1)', 
-          'rgba(255, 99, 132, 1)', 
-          'rgba(255, 99, 132, 1)', 
-          'rgba(255, 99, 132, 1)', 
-          'rgba(255, 99, 132, 1)', 
-          'rgba(255, 99, 132, 1)', 
-          'rgba(255, 99, 132, 1)', 
-          'rgba(255, 99, 132, 1)', 
-          'rgba(255, 99, 132, 1)', 
-          'rgba(255, 99, 132, 1)', 
-          'rgba(255, 99, 132, 1)', 
+          'rgba(255, 153, 51, 1)', 
+          'rgba(255, 153, 51, 1)', 
+          'rgba(255, 153, 51, 1)', 
+          'rgba(255, 153, 51, 1)', 
+          'rgba(255, 153, 51, 1)', 
+          'rgba(255, 153, 51, 1)', 
+          'rgba(255, 153, 51, 1)', 
+          'rgba(255, 153, 51, 1)', 
+          'rgba(255, 153, 51, 1)', 
+          'rgba(255, 153, 51, 1)', 
+          'rgba(255, 153, 51, 1)', 
+          'rgba(255, 153, 51, 1)', 
         ],
         barPercentage: 0.1,
         barThickness: 20,
@@ -117,12 +121,34 @@ export class BarchartComponent implements OnInit {
             display: true,
             text: 'Expense/Income Barchart',
             fontSize:20,
-
           }
         }
       });
     });
-  }
+  };
+  applyFilter(currentamount){
+    this.barchart.data[0].data = this.barchart.Amount;
+    this.barchart.data[1].data = this.barchart.Amount2;
+
+    this.barchart.data.forEach((data) => {
+      if(this.lessThanOrGreaterThan === 'greaterThan'){
+        this.barchart.data = data.map(v =>{
+          if(v>=this.Amount) return v
+          else return 0;
+        })
+      }else{
+        this.barchart.data = data.map(v =>{
+          if(v<=this.Amount2) return v
+          else return 0;
+        });
+      }
+    });
+    this.barchart.update();
+  };
+  applyDateFilter(){
+    this.barchart.data.labels = this.Months.slice(parseInt(this.from), parseInt(this.toMonth) + 1);
+    this.barchart.update();
+  };
 }
 
 

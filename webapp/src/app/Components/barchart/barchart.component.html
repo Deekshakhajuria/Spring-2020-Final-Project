@@ -1,7 +1,46 @@
 <div class="container">
-   <div class="row">
-       <div class="col-xl-7 mx-0 p-8 m-10">
-           <canvas id="canvas1"></canvas>
-       </div>
-   </div>
+    <div id="range-selector">
+        <!-- <input type="button" id="3m" class="period" value="3 Month" />
+        <input type="button" id="6m" class="period" value="6 Month" />
+        <input type="button" id="1y" class="period" value="1 Year" />
+        <input type="button" id="all" class="period" value="All" /> -->
+        <!-- <select [(ngModel)]="lessThanOrGreaterThan" style="width: 150px;height: 30px;">
+            <option value='lessThan'>Less Than</option>
+            <option value='greaterThan'>Greater Than</option>
+        </select>&nbsp;&nbsp;
+        <input [(ngModel)]="filterLimit" placeholder="Filter Limit">
+        <button class="button" (click)="applyFilter(filterLimit)">Apply Filter</button>
+    </div>
+
+
+    <div style="margin-left: auto">
+        <select [(ngModel)]="from" style="width: 150px;height: 30px;">
+          <option *ngFor="let m of Months " [value]='m.currentamount'>{{m.Months}}</option>
+        </select>
+      &nbsp;&nbsp;
+      
+      <select [(ngModel)]="toMonth" style="width: 150px;height: 30px;">
+        <option *ngFor="let m1 of Months " [value]='m1.currentamount'>{{m1.Months}}</option>
+      </select> 
+      </div>
+      
+      <button class="button" (click)="applyDateFilter()">Apply Date Filter</button> -->
+    
+
+
+
+
+
+
+
+    <div id="date-selector" class="">
+        From:<input type="text" id="fromDate">
+        To:<input type="text" id="fromDate">
+
+    </div>
+    <div class="row">
+        <div class="col-xl-7 mx-0 p-8 m-10">
+            <canvas id="canvas1"></canvas>
+        </div>
+    </div>
 </div>
