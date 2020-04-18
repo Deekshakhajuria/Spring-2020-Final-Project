@@ -35,13 +35,14 @@ export class ProfileComponent implements OnInit {
       return false;
     });
 
+    // get total logged income values
     this.incomeService.getAllIncome().subscribe(items => {
       this.incomes = items;
       items.forEach(x => {
         this.totalIncome += x.amount;
       })
   });
-
+    // get total logged expense values
     this.expenseService.getAllExpense().subscribe(items => {
       this.expenses = items;
       items.forEach(x=> {
