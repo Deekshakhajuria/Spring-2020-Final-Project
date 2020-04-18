@@ -31,7 +31,7 @@ You need install Git firstly, then easily clone this repository link. Open proje
 1. Clone the repository.
 2. Run `npm install` in both folders to install the dependencies.
 3. Navigate to repo directory/server.
-4. Under you mongoDB bin folder un `mongo.exe` to start the mongoDB service.
+4. Under you mongoDB bin folder run `mongo.exe` to start the mongoDB service.
 5. Run `node server.js/nodemon` to start the server on port `3000`.
 6. Run `ng serve` on another terminal and navigate to directory/webapp to start the angular project.
 7. Launch the http://localhost:4200/ to start the app.  
