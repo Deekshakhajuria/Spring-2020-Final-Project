@@ -27,13 +27,13 @@
     No  basic requirements to run this project. However, you may need Git to launch this js file.
 
 ### Steps to run
-    You need install Git firstly, then easily clone this repository link. Open project folder and launch the html with Chrome (on latest version) to see the output or with Visual Studio Code to check and edit the code.
-    1. Clone repository.
-    2. Run `npm install` in both folder to install the dependencies.
-    3. Navigate to repo directory/server.
-    4. Run `mongod.exe`.
-    5. Run `node server.js` to start the server on post `3000`.
-    6. Run `ng serve` on another terminal and navigate to directory/webapp to start the program.
-    7. Launch the http://localhost:4200/ to start the app.  
+You need install Git firstly, then easily clone this repository link. Open project folder and launch the html with Chrome (on latest version) to see the output or with Visual Studio Code to check and edit the code.
+1. Clone the repository.
+2. Run `npm install` in both folders to install the dependencies.
+3. Navigate to repo directory/server.
+4. Under you mongoDB bin folder un `mongo.exe` to start the mongoDB service.
+5. Run `node server.js/nodemon` to start the server on port `3000`.
+6. Run `ng serve` on another terminal and navigate to directory/webapp to start the angular project.
+7. Launch the http://localhost:4200/ to start the app.  
 
             2020 TEAM Team.Inc ALL RIGHT Reserved. final-project-team-team created by GitHub Classroom
