@@ -1,0 +1,27 @@
+<div class="container col-md-10 offset-md-1 ">
+    <h1 class="page-header">
+        Currency Converter
+    </h1>
+    <div>
+      <simple-money
+        [baseCurrencies]="baseCurrencies"
+        [otherCurrencies]="currencies"
+        (updateExchangeRates)="onExchangeRateUpdate($event)"
+        (errorMessage)="responseErrorMessage=$event">
+      </simple-money>
+      <div class="output-container">
+        <simple-loading-spinner *ngIf="isLoading"></simple-loading-spinner>
+        <simple-currency-list
+          *ngIf="!isLoading"
+          [rates]="newRates"
+          [currencies]="currencies"
+          [responseErrorMessage]="responseErrorMessage">
+        </simple-currency-list>
+      </div>
+    </div>
+    <footer>
+      <p *ngIf="newRates">
+        Last Update: {{ newRates.date | date }}
+      </p>
+    </footer>
+  <div>

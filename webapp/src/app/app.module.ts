@@ -38,6 +38,12 @@ import { PiechartComponent } from './Components/piechart/piechart.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ChartsComponent } from './Components/charts/charts.component';
 
+import { CurrencyconverterComponent } from "./Components/currency-converter/currencyconverter.component";
+import { MoneyComponent } from './Components/currency-converter/money/money.component';
+import { CurrencySelectorComponent } from './Components/currency-converter/currency-selector/currency-selector.component';
+import { CurrencyListComponent } from './Components/currency-converter/currency-list/currency-list.component';
+import { CurrencyListItemComponent } from './Components/currency-converter/currency-list/currency-list-item/currency-list-item.component';
+import { LoadingSpinnerComponent } from './Components/currency-converter/loading-spinner/loading-spinner.component';
 
 
 @NgModule({
@@ -55,6 +61,12 @@ import { ChartsComponent } from './Components/charts/charts.component';
     BarchartComponent,
     PiechartComponent,
     ChartsComponent,
+    CurrencyconverterComponent,
+    MoneyComponent,
+    CurrencySelectorComponent,
+    CurrencyListComponent,
+    CurrencyListItemComponent,
+    LoadingSpinnerComponent
   ],
   imports: [
     BrowserModule,
@@ -84,6 +96,7 @@ import { ChartsComponent } from './Components/charts/charts.component';
       {path: 'incomedashboard', component: IncomeDashboardComponent,canActivate:[AuthGuard]},
       {path: 'profile', component: ProfileComponent,canActivate:[AuthGuard]},
       {path: 'barchart', component:BarchartComponent},
+      {path: 'currencyconverter', component: CurrencyconverterComponent},
       {path: 'piechart', component:PiechartComponent},
       {path: 'charts', component:ChartsComponent},
     ]),
