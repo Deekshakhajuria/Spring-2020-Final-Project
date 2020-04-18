@@ -4,6 +4,13 @@ import { ExpenseService } from '../../services/expense.service';
 import { Expense } from 'src/app/models/expense';
 import { Income } from 'src/app/models/income';
 import { IncomeService } from 'src/app/services/income.service';
+//picker
+import { FormControl } from '@angular/forms';
+import { MomentDateAdapter, MAT_MOMENT_DATE_ADAPTER_OPTIONS } from '@angular/material-moment-adapter';
+import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
+import { MatDatepicker } from '@angular/material/datepicker';
+
+
 
 
 // var Months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'Ocotober', 'Novemeber', 'December'];
@@ -60,18 +67,18 @@ export class BarchartComponent implements OnInit {
         // yAxisID: 'y-axis-1',
         borderColor: '#3cba9f',
         backgroundColor: [ //background color code for 12 bars
-          'rgba(255, 153, 51, 1)', 
-          'rgba(255, 153, 51, 1)', 
-          'rgba(255, 153, 51, 1)', 
-          'rgba(255, 153, 51, 1)', 
-          'rgba(255, 153, 51, 1)', 
-          'rgba(255, 153, 51, 1)', 
-          'rgba(255, 153, 51, 1)', 
-          'rgba(255, 153, 51, 1)', 
-          'rgba(255, 153, 51, 1)', 
-          'rgba(255, 153, 51, 1)', 
-          'rgba(255, 153, 51, 1)', 
-          'rgba(255, 153, 51, 1)', 
+          'rgba(255, 153, 51, 1)',
+          'rgba(255, 153, 51, 1)',
+          'rgba(255, 153, 51, 1)',
+          'rgba(255, 153, 51, 1)',
+          'rgba(255, 153, 51, 1)',
+          'rgba(255, 153, 51, 1)',
+          'rgba(255, 153, 51, 1)',
+          'rgba(255, 153, 51, 1)',
+          'rgba(255, 153, 51, 1)',
+          'rgba(255, 153, 51, 1)',
+          'rgba(255, 153, 51, 1)',
+          'rgba(255, 153, 51, 1)',
         ],
         barPercentage: 0.1,
         barThickness: 20,
@@ -113,43 +120,24 @@ export class BarchartComponent implements OnInit {
 
       // need to use this data Together otherwise those two bar will Stack together
       this.barchart = new Chart('canvas1', {
-        type:'bar',   //chart type
-        data :Together,
-        options:{
+        type: 'bar',   //chart type
+        data: Together,
+        options: {
           responsive: true,
-          title:{
+          title: {
             display: true,
             text: 'Expense/Income Barchart',
-            fontSize:20,
+            fontSize: 20,
           }
         }
       });
+      
     });
-  };
-  applyFilter(currentamount){
-    this.barchart.data[0].data = this.barchart.Amount;
-    this.barchart.data[1].data = this.barchart.Amount2;
-
-    this.barchart.data.forEach((data) => {
-      if(this.lessThanOrGreaterThan === 'greaterThan'){
-        this.barchart.data = data.map(v =>{
-          if(v>=this.Amount) return v
-          else return 0;
-        })
-      }else{
-        this.barchart.data = data.map(v =>{
-          if(v<=this.Amount2) return v
-          else return 0;
-        });
-      }
-    });
-    this.barchart.update();
-  };
-  applyDateFilter(){
-    this.barchart.data.labels = this.Months.slice(parseInt(this.from), parseInt(this.toMonth) + 1);
-    this.barchart.update();
   };
 }
+
+//picker
+
 
 
 
