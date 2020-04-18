@@ -37,6 +37,7 @@ import { BarchartComponent } from "./Components/barchart/barchart.component";
 import { PiechartComponent } from './Components/piechart/piechart.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ChartsComponent } from './Components/charts/charts.component';
+import { DoughnutchartComponent } from './Components/doughnutchart/doughnutchart.component';
 
 import { CurrencyconverterComponent } from "./Components/currency-converter/currencyconverter.component";
 import { MoneyComponent } from './Components/currency-converter/money/money.component';
@@ -66,7 +67,8 @@ import { LoadingSpinnerComponent } from './Components/currency-converter/loading
     CurrencySelectorComponent,
     CurrencyListComponent,
     CurrencyListItemComponent,
-    LoadingSpinnerComponent
+    LoadingSpinnerComponent,
+    DoughnutchartComponent,
   ],
   imports: [
     BrowserModule,
@@ -99,6 +101,7 @@ import { LoadingSpinnerComponent } from './Components/currency-converter/loading
       {path: 'currencyconverter', component: CurrencyconverterComponent},
       {path: 'piechart', component:PiechartComponent},
       {path: 'charts', component:ChartsComponent},
+      {path: 'doughnutchart', component:DoughnutchartComponent},
     ]),
     FontAwesomeModule
   ],

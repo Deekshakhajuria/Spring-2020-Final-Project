@@ -1,44 +1,44 @@
 import { Component, OnInit } from '@angular/core';
-import { ExpenseService } from '../../services/expense.service';
+import { IncomeService } from 'src/app/services/income.service';
+import { Income } from 'src/app/models/income';
 import { Chart } from 'chart.js';
-import { Expense } from 'src/app/models/expense';
 
 @Component({
-  selector: 'app-piechart',
-  templateUrl: './piechart.component.html',
+  selector: 'app-doughnutchart',
+  templateUrl: './doughnutchart.component.html',
+  styleUrls: ['./doughnutchart.component.scss']
 })
-export class PiechartComponent implements OnInit {
-
-  data: ExpenseService[];  
-  expenses: Expense[];
-  Category = ["Travel","Shopping","Rent","Dining","Medicial","Mobile/Internet bill","Other"];  
+export class DoughnutchartComponent implements OnInit {
+  
+  data: IncomeService[];  
+  incomes: Income[];
+  Category = ["Salary","Investment Income","Bonus","Refund","Side Money","Loan","Other"];  
   Amount = [0,0,0,0,0,0,0];  
   currentCategory: any;
   currentamount: number;
   currentDate: any;
   chart : any;  
+  constructor(private incomeService: IncomeService ) {}
 
-  constructor(private expenseService: ExpenseService) { } 
-  
-   ngOnInit() {  
-    this.expenseService.getAllExpense().subscribe(result => {  
+  ngOnInit(): void {
+    this.incomeService.getAllIncome().subscribe(result => {  
       result.forEach(x => {
         
         this.currentCategory = new String(x.category);  
         this.currentamount = x.amount;
         // since Amount is an array which needs to set as the related tag names.
-        if(this.currentCategory == "Travel"){
+        if(this.currentCategory == "Salary"){
           this.Amount[0] += this.currentamount;
-        }else if(this.currentCategory == "Shopping"){
+        }else if(this.currentCategory == "Investment Income"){
           this.Amount[1] += this.currentamount;
         }
-        else if(this.currentCategory == "Rent"){
+        else if(this.currentCategory == "Bonus"){
           this.Amount[2] += this.currentamount;
         }
-        else if(this.currentCategory == "Dining"){
+        else if(this.currentCategory == "Refund"){
           this.Amount[3] += this.currentamount;
         }
-        else if(this.currentCategory == "Medicial"){
+        else if(this.currentCategory == "Side Money"){
           this.Amount[4] += this.currentamount;
         }
         else if(this.currentCategory == "Other"){
@@ -49,8 +49,8 @@ export class PiechartComponent implements OnInit {
       });  
 
 
-     this.chart = new Chart('canvas', {  
-        type: 'pie',  
+     this.chart = new Chart('canvas3', {  
+        type: 'doughnut',  
         data: {  
           labels: this.Category,  
           datasets: [  
@@ -73,7 +73,7 @@ export class PiechartComponent implements OnInit {
         options: {
           title:{
             display:true,
-            text:'Expense Category',
+            text:'Income Category',
             fontSize:20,
           },
           legend: {  
@@ -91,4 +91,5 @@ export class PiechartComponent implements OnInit {
       });  
     });  
   }
+
 }

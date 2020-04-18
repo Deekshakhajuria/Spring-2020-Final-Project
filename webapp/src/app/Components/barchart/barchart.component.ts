@@ -1,7 +1,16 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit, OnChanges, SimpleChange } from '@angular/core';
 import { Chart } from 'chart.js';
 import { ExpenseService } from '../../services/expense.service';
 import { Expense } from 'src/app/models/expense';
+import { Income } from 'src/app/models/income';
+import { IncomeService } from 'src/app/services/income.service';
+//picker
+import { FormControl } from '@angular/forms';
+import { MomentDateAdapter, MAT_MOMENT_DATE_ADAPTER_OPTIONS } from '@angular/material-moment-adapter';
+import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
+import { MatDatepicker } from '@angular/material/datepicker';
+
+
 
 
 // var Months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'Ocotober', 'Novemeber', 'December'];
@@ -16,85 +25,126 @@ import { Expense } from 'src/app/models/expense';
 
 export class BarchartComponent implements OnInit {
   data: ExpenseService[];
+  data2: IncomeService[];
+
   expenses: Expense[];
+  income: Income[];
+
   Months = [];
-  Amount = [null,null,null,null,null,null,null,null,null,null,null,null];
-  // date: Date;
+  Amount = [null, null, null, null, null, null, null, null, null, null, null, null];
+  Amount2 = [null, null, null, null, null, null, null, null, null, null, null, null];
+
   currentDate: any;
   barchart: any;
   currentamount: number;
+  currentamount2: number;
 
-  constructor(private expenseService: ExpenseService) { }
+  lessThanOrGreaterThan = 'lessThan';
+  filterLimit = 100;
+  from = '0';
+  toMonth = '12';
+
+  constructor(private expenseService: ExpenseService, private incomeService: IncomeService) { }
 
   ngOnInit() {
-
+    this.incomeService.getAllIncome().subscribe(result => {
+      result.forEach(y => {
+        this.currentDate = new Date(y.Date);    // import Date from database)
+        this.currentamount2 = y.amount;          // create a currentamount array for import amount
+        this.Amount2[this.currentDate.getMonth()] += this.currentamount2;// push amount into bar chart with related month
+      });
+    })// for income part bar
     this.expenseService.getAllExpense().subscribe(result => {
       result.forEach(x => {
         this.currentDate = new Date(x.Date);    // import Date from database)
         this.currentamount = x.amount;          // create a currentamount array for import amount
         this.Amount[this.currentDate.getMonth()] += this.currentamount;// push amount into bar chart with related month
       });
+      //for Expense part bar
+      var Expense_Part = {
+        data: this.Amount,
+        label: 'Expense',
+        // yAxisID: 'y-axis-1',
+        borderColor: '#3cba9f',
+        backgroundColor: [ //background color code for 12 bars
+          'rgba(255, 153, 51, 1)',
+          'rgba(255, 153, 51, 1)',
+          'rgba(255, 153, 51, 1)',
+          'rgba(255, 153, 51, 1)',
+          'rgba(255, 153, 51, 1)',
+          'rgba(255, 153, 51, 1)',
+          'rgba(255, 153, 51, 1)',
+          'rgba(255, 153, 51, 1)',
+          'rgba(255, 153, 51, 1)',
+          'rgba(255, 153, 51, 1)',
+          'rgba(255, 153, 51, 1)',
+          'rgba(255, 153, 51, 1)',
+        ],
+        barPercentage: 0.1,
+        barThickness: 20,
+        maxBarThickness: 50,
+        minBarLength: 2,
+        fill: true,
+      }
+      // for Income part bar
+      var Income_Part = {
+        data: this.Amount2,
+        label: 'Income',
+        // yAxisID: 'y-axis-2',
+        borderColor: '#3cba9f',
+        backgroundColor: [ //background color code for 12 bars
+          'rgba(50, 205, 50, 1)',
+          'rgba(50, 205, 50, 1)',
+          'rgba(50, 205, 50, 1)',
+          'rgba(50, 205, 50, 1)',
+          'rgba(50, 205, 50, 1)',
+          'rgba(50, 205, 50, 1)',
+          'rgba(50, 205, 50, 1)',
+          'rgba(50, 205, 50, 1)',
+          'rgba(50, 205, 50, 1)',
+          'rgba(50, 205, 50, 1)',
+          'rgba(50, 205, 50, 1)',
+          'rgba(50, 205, 50, 1)',
+        ],
+        barPercentage: 0.1,
+        barThickness: 20,
+        maxBarThickness: 50,
+        minBarLength: 2,
+        fill: true,
+      }
+      // union Income and Expense together
+      var Together = {
+        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+        datasets: [Expense_Part, Income_Part]
+      }
 
+      // need to use this data Together otherwise those two bar will Stack together
       this.barchart = new Chart('canvas1', {
-        type: 'bar',
-        data: {
-          labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-          datasets: [
-            {
-              data: this.Amount,
-              borderColor: '#3cba9f',
-              backgroundColor: [ //background color code for 12 bars
-                'rgba(255, 99, 132, 1)', //1
-                'rgba(54, 162, 235, 1)', //2
-                'rgba(255, 206, 86, 1)', //3
-                'rgba(75, 192, 192, 1)', //4
-                'rgba(153, 102, 255, 1)', //5
-                'rgba(255, 159, 64, 1)', //6
-                'rgba(215, 129, 233, 1)', //7
-                'rgba(175, 211, 86, 1)', //8
-                'rgba(35, 92, 192, 1)', //9
-                'rgba(125, 36, 76, 1)', //10
-                'rgba(95, 122, 192, 1)', //11
-                'rgba(175, 122, 162, 1)', //12
-              ],
-              barPercentage: 0.5,
-              barThickness: 30,
-              maxBarThickness: 50,
-              minBarLength: 2,
-              fill: true,
-            }
-          ]
-        },
+        type: 'bar',   //chart type
+        data: Together,
         options: {
-          legend: {
-            display: false
-          },
-          scales: {
-            xAxes: [{
-              stacked: true,
-              gridLines: {
-                offsetGridLines: true
-              },
-              ticks:{
-                maxRotation: 0, //make sure the Month label is in the right rotation.(default is 45 degree)
-                minRotation: 0,
-                padding: 10,
-
-              }
-            }],
-            yAxes: [{
-              display: true,
-              ticks: {
-                beginAtZero: true,
-                callback: function(value, index, values){
-                  return "$" +value;// use call back function to make $ currency on Y axes
-                }
-              }
-            }],
-
+          responsive: true,
+          title: {
+            display: true,
+            text: 'Expense/Income Barchart',
+            fontSize: 20,
           }
         }
       });
+      
     });
-  }
+  };
 }
+
+//picker
+
+
+
+
+
+
+
+
+
+
+
