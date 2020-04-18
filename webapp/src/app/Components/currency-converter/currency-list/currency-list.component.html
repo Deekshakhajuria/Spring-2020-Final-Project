@@ -1,0 +1,16 @@
+<div>
+    <div role="alert">
+      <p class="error-message" *ngIf="!rates && responseErrorMessage">{{ responseErrorMessage }}</p>
+    </div>
+    <p *ngIf="!rates && !responseErrorMessage"> <strong>Insert the amount that you want to convert in the field above</strong></p>
+    <ul *ngIf="rates">
+      <simple-currency-list-item
+        *ngFor="let currencyDetails of wCurrencies | keyvalue:customListOrder"
+        [amount]="rates.amount"
+        [otherCurrencyConversionRate]="currencyDetails.value.rate"
+        [baseCurrencyCode]="rates.baseCurrencyCode"
+        [otherCurrencyCode]="currencyDetails.key"
+      >
+      </simple-currency-list-item>
+    </ul>
+  </div>
