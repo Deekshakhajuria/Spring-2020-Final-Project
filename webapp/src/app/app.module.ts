@@ -45,6 +45,7 @@ import { CurrencySelectorComponent } from './Components/currency-converter/curre
 import { CurrencyListComponent } from './Components/currency-converter/currency-list/currency-list.component';
 import { CurrencyListItemComponent } from './Components/currency-converter/currency-list/currency-list-item/currency-list-item.component';
 import { LoadingSpinnerComponent } from './Components/currency-converter/loading-spinner/loading-spinner.component';
+import { DownloadComponent } from './download/download.component';
 
 
 @NgModule({
@@ -69,6 +70,7 @@ import { LoadingSpinnerComponent } from './Components/currency-converter/loading
     CurrencyListItemComponent,
     LoadingSpinnerComponent,
     DoughnutchartComponent,
+    DownloadComponent,
   ],
   imports: [
     BrowserModule,
