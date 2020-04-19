@@ -4,12 +4,6 @@ import { ExpenseService } from '../../services/expense.service';
 import { Expense } from 'src/app/models/expense';
 import { Income } from 'src/app/models/income';
 import { IncomeService } from 'src/app/services/income.service';
-//picker
-import { FormControl } from '@angular/forms';
-import { MomentDateAdapter, MAT_MOMENT_DATE_ADAPTER_OPTIONS } from '@angular/material-moment-adapter';
-import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
-import { MatDatepicker } from '@angular/material/datepicker';
-
 
 
 
@@ -24,18 +18,19 @@ import { MatDatepicker } from '@angular/material/datepicker';
 
 
 export class BarchartComponent implements OnInit {
-  data: ExpenseService[];
-  data2: IncomeService[];
+  // data: ExpenseService[];
+  // data2: IncomeService[];
 
   expenses: Expense[];
   income: Income[];
 
-  Months = [];
+  // Months = [];
   Amount = [null, null, null, null, null, null, null, null, null, null, null, null];
+
   Amount2 = [null, null, null, null, null, null, null, null, null, null, null, null];
 
   currentDate: any;
-  barchart: any;
+  barchart1: any;
   currentamount: number;
   currentamount2: number;
 
@@ -119,7 +114,7 @@ export class BarchartComponent implements OnInit {
       }
 
       // need to use this data Together otherwise those two bar will Stack together
-      this.barchart = new Chart('canvas1', {
+      this.barchart1 = new Chart('canvas1', {
         type: 'bar',   //chart type
         data: Together,
         options: {
