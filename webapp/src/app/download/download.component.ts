@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { AppService } from "../services/downloadfile.service";
+
 import { ExpenseService } from '../services/expense.service';
 import { Expense } from 'src/app/models/expense';
+import * as XLSX from 'xlsx';
+
 
 
 @Component({
@@ -9,18 +11,23 @@ import { Expense } from 'src/app/models/expense';
   templateUrl: './download.component.html',
   styleUrls: ['./download.component.scss']
 })
-export class DownloadComponent implements OnInit {
+export class DownloadComponent {
+  /*name of the excel-file which will be downloaded. */ 
+/*name of the excel-file which will be downloaded. */ 
+fileName= 'ExcelSheet.xlsx';  
 
-  constructor(private appService:AppService) { }
+  constructor() { }
 
-  ngOnInit(): void {
-  }
-  jsonData =  [
-    
-  ];
+  exportexcel(): void {
+    /* table id is passed over here */   
+    let element = document.getElementById('expense'); 
+    const ws: XLSX.WorkSheet =XLSX.utils.table_to_sheet(element);
 
-download(){
-  this.appService.downloadFile(this.jsonData, 'jsontocsv');
-}
-  
+    /* generate workbook and add the worksheet */
+    const wb: XLSX.WorkBook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+
+    /* save to file */
+    XLSX.writeFile(wb, this.fileName);
+  } 
 }
