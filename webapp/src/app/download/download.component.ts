@@ -14,7 +14,7 @@ import * as XLSX from 'xlsx';
 export class DownloadComponent {
   /*name of the excel-file which will be downloaded. */ 
 /*name of the excel-file which will be downloaded. */ 
-fileName= 'ExcelSheet.xlsx';  
+fileName= 'Expenses.xlsx';  
 
   constructor() { }
 
