@@ -27,7 +27,7 @@
             <br>
             <h5 style="font-weight: bold;">Current Balance: 
                 <!-- if balance > 0, display green text; else red text -->
-                <span *ngIf="totalExpense < totalIncome"  class="text-success" >{{totalIncome - totalExpense}}</span>
+                <span *ngIf="totalExpense < totalIncome || totalExpense == totalIncome"  class="text-success" >{{totalIncome - totalExpense}}</span>
                 <span *ngIf="totalExpense > totalIncome"  class="text-danger" >{{totalIncome - totalExpense}}</span>
 
             </h5>
