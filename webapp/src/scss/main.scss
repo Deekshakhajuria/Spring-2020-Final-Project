@@ -19,4 +19,44 @@
 
 
 
+//style for charts
 
+//container for barchart
+// .container{
+//     text-align: center;
+// }
+
+//cards margin
+mat-card{
+    margin: 15px;
+}
+
+//pie chart 
+.piechart{
+    margin-left: 30px;
+    height: 350px;
+    width: 46%;
+}
+//layout for doughnuchart
+.doughnutchart{
+    width: 46%;
+    height: 350px;
+    text-align: center;
+}
+//layout for pie chart inside 
+.pie1{
+    size: initial;
+    text-align: center;
+    margin: 0 auto;
+}
+//layout for doughnut chart inside 
+.doughnut1{
+    size: initial;
+    text-align: center;
+    margin: 0 auto;
+}
+// summary card size
+.summary{
+    width: 1110px;
+    margin-left: auto;
+}

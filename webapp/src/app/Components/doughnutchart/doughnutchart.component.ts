@@ -86,7 +86,15 @@ export class DoughnutchartComponent implements OnInit {
             yAxes: [{  
               display: false  
             }],  
-          }  
+          },
+          responsive:true,
+          maintainAspectRatio: true,
+          aspectRatio:1,
+          // layout:{
+          //   padding:{
+          //     left:150,
+          //   }
+          // }
         }  
       });  
     });  
