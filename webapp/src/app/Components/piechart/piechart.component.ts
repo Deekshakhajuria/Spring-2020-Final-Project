@@ -9,8 +9,7 @@ import { Expense } from 'src/app/models/expense';
 })
 export class PiechartComponent implements OnInit {
 
-  data: ExpenseService[];  
-  expenses: Expense[];
+  // data: ExpenseService[];  
   Category = ["Travel","Shopping","Rent","Dining","Medicial","Mobile/Internet bill","Other"];  
   Amount = [0,0,0,0,0,0,0];  
   currentCategory: any;
@@ -23,7 +22,7 @@ export class PiechartComponent implements OnInit {
    ngOnInit() {  
     this.expenseService.getAllExpense().subscribe(result => {  
       result.forEach(x => {
-        
+        //get all expenses from the backend
         this.currentCategory = new String(x.category);  
         this.currentamount = x.amount;
         // since Amount is an array which needs to set as the related tag names.
@@ -52,7 +51,7 @@ export class PiechartComponent implements OnInit {
      this.chart = new Chart('canvas', {  
         type: 'pie',  
         data: {  
-          labels: this.Category,  
+          labels: this.Category,  // passing through the category
           datasets: [  
             {  
               data: this.Amount,  
@@ -66,6 +65,7 @@ export class PiechartComponent implements OnInit {
                 'rgba(255, 159, 64, 1)', //6
                 'rgba(215, 129, 233, 1)', //7
               ],  
+              // borderWidth:[6,6,6,6,6,6,6],
               fill: true  
             }  
           ]  
@@ -87,6 +87,12 @@ export class PiechartComponent implements OnInit {
               display: false  
             }], 
           },
+          // elements:{
+          //   arc:{
+          //     borderWidth:5,
+          //     borderColor: '#FFFFFF',
+          //   }
+          // },
           responsive:true,
           maintainAspectRatio: true,
           aspectRatio:1
