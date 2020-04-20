@@ -14,8 +14,8 @@ import { from } from 'rxjs';
 })
 export class ProfileComponent implements OnInit {
   user: any;
-  expenses: Expense[];
-  incomes: Income[];
+  expenses: Expense[]=[];
+  incomes: Income[]=[];
   totalExpense: any = 0;
   totalIncome: any = 0;
   balance: any = 0;
