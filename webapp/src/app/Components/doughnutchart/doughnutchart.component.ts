@@ -11,7 +11,6 @@ import { Chart } from 'chart.js';
 export class DoughnutchartComponent implements OnInit {
   
   data: IncomeService[];  
-  incomes: Income[];
   Category = ["Salary","Investment Income","Bonus","Refund","Side Money","Loan","Other"];  
   Amount = [0,0,0,0,0,0,0];  
   currentCategory: any;
@@ -52,10 +51,10 @@ export class DoughnutchartComponent implements OnInit {
      this.chart = new Chart('canvas3', {  
         type: 'doughnut',  
         data: {  
-          labels: this.Category,  
+          labels: this.Category,  // passing through the array for labels
           datasets: [  
             {  
-              data: this.Amount,  
+              data: this.Amount,  //passing through the data for amounts
               borderColor: 'rgba(0, 0, 0, 0)',  
               backgroundColor: [  
                 'rgba(255, 99, 132, 1)', //1
@@ -71,6 +70,7 @@ export class DoughnutchartComponent implements OnInit {
           ]  
         },  
         options: {
+          // for setting up titles
           title:{
             display:true,
             text:'Income Category',
@@ -79,6 +79,7 @@ export class DoughnutchartComponent implements OnInit {
           legend: {  
             display: true 
           },  
+          //for scales
           scales: {  
             xAxes: [{  
               display: false  
@@ -89,7 +90,7 @@ export class DoughnutchartComponent implements OnInit {
           },
           responsive:true,
           maintainAspectRatio: true,
-          aspectRatio:1,
+          aspectRatio:1,// maintain the same scale
           // layout:{
           //   padding:{
           //     left:150,
