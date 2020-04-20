@@ -85,8 +85,11 @@ export class PiechartComponent implements OnInit {
             }],  
             yAxes: [{  
               display: false  
-            }],  
-          }  
+            }], 
+          },
+          responsive:true,
+          maintainAspectRatio: true,
+          aspectRatio:1
         }  
       });  
     });  
