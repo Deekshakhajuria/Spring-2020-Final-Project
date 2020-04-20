@@ -19,6 +19,8 @@
   - As a user, You can store all your data locally by using mongodb.
   - As a user, You can edit/delete your expenses/incomes on backend by using Postman.
   - As a user, You can make changes on currencies and see latest exchange rate by using fully-funtional currency converter.
+  - As a user, You can download your logged expenses to an excel sheet.
+  - As a user, You can download your logged income to an excel sheet.
 
 ### Technologies used
     JavaScript, mongoDB, html, Angular, React Programming, SCSS, bootstrap
