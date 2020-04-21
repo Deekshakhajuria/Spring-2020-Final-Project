@@ -14,8 +14,6 @@
   - As a user, You can login/register your own account by entering the email address, name, username, password.
   - As a user, You can see your expenses/incomes on piechart and barchart directly.
   - As a user, You can review your profile summary and see how many expense/incomes you've made.
-  - As a user, You can see your expenses/incomes on piechart and barchart directly.
-  - As a user, You can review your profile summary and see how many expense/incomes you've made.
   - As a user, You can store all your data locally by using mongodb.
   - As a user, You can edit/delete your expenses/incomes on backend by using Postman.
   - As a user, You can make changes on currencies and see latest exchange rate by using fully-funtional currency converter.
